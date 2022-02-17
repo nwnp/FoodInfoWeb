@@ -1,0 +1,27 @@
+{
+  "name": "foodinfoweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwnp/FoodInfoWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwnp/FoodInfoWeb/issues"
+  },
+  "homepage": "https://github.com/nwnp/FoodInfoWeb#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nunjucks": "^3.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
