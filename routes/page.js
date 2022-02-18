@@ -27,4 +27,8 @@ router.get("/post", (req, res, next) => {
   next();
 });
 
+router.get("/user", (req, res, next) => {
+  logger.info(`${req.params}`);
+});
+
 module.exports = router;
