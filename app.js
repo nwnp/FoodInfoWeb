@@ -3,6 +3,10 @@ const nunjucks = require("nunjucks");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 // const http = require("http");
 
 const PORT = 8080;
@@ -24,7 +28,23 @@ const indexRouter = require("./routes/index");
 const pageRouter = require("./routes/page");
 
 // app.use(cors(corsOptions));
+app.use(morgan("dev"));
+app.use("/", express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+);
 
 app.set("view engine", "html");
 nunjucks.configure("views", {
