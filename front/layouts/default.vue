@@ -1,39 +1,52 @@
 <template>
-  <div>
-    <v-app-bar color="#7291ed" dense dark>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-toolbar-title>FoodInfo Web</v-toolbar-title>
-      <v-spacer></v-spacer>
+  <v-app>
+    <nav>
+      <v-toolbar color="#7291ed" dense dark>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-toolbar-title>
+          <nuxt-link to="/">FoodInfo Web</nuxt-link>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
 
-      <!-- <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn> -->
-      <v-text-field>
-        <v-text-field
-          label="검색"
-          prepend-icon="mdi-magnify"
-          :style="{ display: 'flex', alginItems: 'center' }"
-        ></v-text-field>
-      </v-text-field>
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-menu left bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon icon v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-app-bar>
-  </div>
+        <v-toolbar-items>
+          <v-text-field
+            label="검색"
+            prepend-icon="mdi-magnify"
+            :style="{ display: 'flex', alginItems: 'center' }"
+          />
+          <v-btn
+            text
+            nuxt
+            to="/profile"
+            :style="{ display: 'flex', alignItems: 'center' }"
+          >
+            <div>Profile</div>
+          </v-btn>
+          <v-btn text nuxt to="/signup">
+            <div>회원가입</div>
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+    </nav>
+    <v-container>
+      <v-row>
+        <v-col cols="12" xs="12" md="4">
+          <login-form />
+        </v-col>
+        <v-col cols="12" xs="12" md="8">
+          <nuxt />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-export default {};
+import LoginForm from "../components/LoginForm.vue";
+
+export default {
+  components: {
+    LoginForm,
+  },
+};
 </script>

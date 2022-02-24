@@ -1,9 +1,73 @@
 <template>
-  <div>
-    <h1>signup page</h1>
-  </div>
+  <v-container>
+    <v-card>
+      <v-container>
+        <h1>회원가입</h1>
+        <v-form ref="form" v-model="valid" @click.prevent="onSubmitForm">
+          <v-text-field
+            v-model="email"
+            label="이메일"
+            type="email"
+            :rules="emailRules"
+            required
+          />
+          <v-text-field
+            v-model="password"
+            label="비밀번호"
+            type="password"
+            :rules="passwordRules"
+            required
+          />
+          <v-text-field
+            v-model="passwordCheck"
+            label="비밀번호 확인"
+            type="password"
+            :rules="passwordCheckRules"
+            required
+          />
+          <v-checkbox
+            v-model="terms"
+            label="동의해야 가입할 수 있음"
+            :rules="checkRules"
+            required
+          />
+          <v-btn color="#7291ed" type="submit">가입하기</v-btn>
+        </v-form>
+      </v-container>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      valid: false,
+      email: "",
+      password: "",
+      passwordCheck: "",
+      nickname: "",
+      terms: false,
+      passwordRules: [(v) => !!v || "비밀번호 입력은 필수입니다."],
+      emailRules: [
+        (v) => !!v || "이메일 입력은 필수입니다.",
+        (v) => /.+@.+/.test(v) || "이메일이 유효하지 않습니다.",
+      ],
+      passwordCheckRules: [
+        (v) => !!v || "비밀번호 확인은 필수입니다.",
+        (v) => v === this.password || "비밀번호가 일치하지 않습니다.",
+      ],
+      checkRules: [(v) => !!v || "약관에 동의해야 합니다."],
+    };
+  },
+  methods: {
+    onSubmitForm() {
+      if (this.$refs.form.validate()) {
+        alert("회원가입에 성공했습니다.");
+      } else {
+        alert("유효하지 않음");
+      }
+    },
+  },
+};
 </script>
