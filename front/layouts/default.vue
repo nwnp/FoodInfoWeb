@@ -1,56 +1,39 @@
 <template>
-  <v-app>
-    <h1>hello world!</h1>
-    <nav></nav>
-  </v-app>
+  <div>
+    <v-app-bar color="#7291ed" dense dark>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>FoodInfo Web</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <!-- <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn> -->
+      <v-text-field>
+        <v-text-field
+          label="검색"
+          prepend-icon="mdi-magnify"
+          :style="{ display: 'flex', alginItems: 'center' }"
+        ></v-text-field>
+      </v-text-field>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-menu left bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon icon v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
+        </template>
+
+        <v-list>
+          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
+            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+  </div>
 </template>
 
-<style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>
+<script>
+export default {};
+</script>
