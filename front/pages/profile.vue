@@ -3,7 +3,7 @@
     <v-card>
       <v-container>
         <div class="d-flex flex-column justify-space-between align-center">
-          <v-card-title>Profile</v-card-title>
+          <v-card-title class="basil--text">Profile</v-card-title>
           <v-avatar color="indigo" size="100" style="margin-bottom: 16px">
             <span class="white--text text-h5">{{ user.nickname }}</span>
           </v-avatar>
@@ -41,3 +41,11 @@ export default {
   }),
 };
 </script>
+<style>
+.basil {
+  background-color: #fffbe6 !important;
+}
+.basil--text {
+  color: #7291ed !important;
+}
+</style>

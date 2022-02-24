@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-container>
-        <h1>회원가입</h1>
+        <h1 class="basil--text">회원가입</h1>
         <v-form ref="form" v-model="valid" @click.prevent="onSubmitForm">
           <v-text-field
             v-model="email"
@@ -85,3 +85,11 @@ export default {
   },
 };
 </script>
+<style>
+.basil {
+  background-color: #fffbe6 !important;
+}
+.basil--text {
+  color: #7291ed !important;
+}
+</style>

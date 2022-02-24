@@ -4,7 +4,7 @@
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
         <v-container>
           <!-- <v-subheader>로그인</v-subheader> -->
-          <v-card-title>Login</v-card-title>
+          <v-card-title class="basil--text">Login</v-card-title>
           <v-text-field
             label="이메일"
             type="email"
@@ -84,3 +84,11 @@ export default {
   },
 };
 </script>
+<style>
+.basil {
+  background-color: #fffbe6 !important;
+}
+.basil--text {
+  color: #7291ed !important;
+}
+</style>
