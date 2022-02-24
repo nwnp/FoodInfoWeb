@@ -4,7 +4,9 @@
       <v-toolbar color="#7291ed" dense dark>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
-          <nuxt-link to="/">FoodInfo Web</nuxt-link>
+          <h1>
+            <a href="/">FoodInfo Web</a>
+          </h1>
         </v-toolbar-title>
         <v-spacer></v-spacer>
 
@@ -14,14 +16,51 @@
             prepend-icon="mdi-magnify"
             :style="{ display: 'flex', alginItems: 'center' }"
           />
-          <v-btn
+        </v-toolbar-items>
+        <v-toolbar-items>
+          <!-- <v-btn
             text
             nuxt
             to="/profile"
             :style="{ display: 'flex', alignItems: 'center' }"
           >
             <div>Profile</div>
-          </v-btn>
+          </v-btn> -->
+
+          <v-container fluid style="height: 300px">
+            <v-row justify="center">
+              <v-menu bottom min-width="200px" rounded offset-y>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon x-large v-on="on">
+                    <v-avatar color="indigo" size="30">
+                      <span class="white--text text-h5">{{
+                        user.nickname
+                      }}</span>
+                    </v-avatar>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-list-item-content class="justify-center">
+                    <div class="mx-auto text-center">
+                      <v-avatar color="primary" size="20">
+                        <span class="white--text text-h5">{{
+                          user.nickname
+                        }}</span>
+                      </v-avatar>
+                      <p class="text-caption mt-1">
+                        {{ user.email }}
+                      </p>
+                      <v-divider class="my-3"></v-divider>
+                      <v-btn nuxt to="/profile" depressed rounded text>
+                        Edit Profile
+                      </v-btn>
+                    </div>
+                  </v-list-item-content>
+                </v-card>
+              </v-menu>
+            </v-row>
+          </v-container>
+
           <v-btn text nuxt to="/signup">
             <div>회원가입</div>
           </v-btn>
@@ -51,5 +90,11 @@ export default {
     LoginForm,
     FooterForm,
   },
+  data: () => ({
+    user: {
+      nickname: "jw",
+      email: "jin@jin.com",
+    },
+  }),
 };
 </script>

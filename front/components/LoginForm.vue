@@ -4,7 +4,7 @@
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
         <v-container>
           <!-- <v-subheader>로그인</v-subheader> -->
-          <h1>로그인</h1>
+          <v-card-title>Login</v-card-title>
           <v-text-field
             label="이메일"
             type="email"
@@ -27,7 +27,7 @@
             style="margin-right: 20px; margin-bottom: 10px"
             dark
           >
-            <v-icon style="margin-right: 10px" dark right>
+            <v-icon style="margin-right: 3px" dark right>
               mdi-checkbox-marked-circle
             </v-icon>
             login</v-btn
@@ -40,7 +40,7 @@
             to="/signup"
             dark
           >
-            <v-icon style="margin-right: 10px" dark> mdi-wrench </v-icon>
+            <v-icon dark> mdi-wrench </v-icon>
             회원가입</v-btn
           >
         </v-container>
