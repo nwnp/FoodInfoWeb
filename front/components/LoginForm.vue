@@ -20,12 +20,29 @@
             required
           />
           <v-btn
+            class="ma-2"
+            color="primary"
             type="submit"
             :disabled="!valid"
             style="margin-right: 20px; margin-bottom: 10px"
-            >login</v-btn
+            dark
           >
-          <v-btn style="margin-bottom: 10px" nuxt to="/signup">회원가입</v-btn>
+            <v-icon style="margin-right: 10px" dark right>
+              mdi-checkbox-marked-circle
+            </v-icon>
+            login</v-btn
+          >
+          <v-btn
+            class="ma-2"
+            color="primary"
+            style="margin-bottom: 10px"
+            nuxt
+            to="/signup"
+            dark
+          >
+            <v-icon style="margin-right: 10px" dark> mdi-wrench </v-icon>
+            회원가입</v-btn
+          >
         </v-container>
       </v-form>
     </v-card>

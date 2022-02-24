@@ -25,13 +25,26 @@
             :rules="passwordCheckRules"
             required
           />
+          <v-text-field
+            v-model="nickname"
+            label="닉네임"
+            type="nickname"
+            :rules="nicknameRules"
+            required
+          />
           <v-checkbox
             v-model="terms"
             label="동의해야 가입할 수 있음"
             :rules="checkRules"
             required
           />
-          <v-btn color="#7291ed" type="submit">가입하기</v-btn>
+          <v-btn class="ma-2" color="primary" type="submit" dark>
+            Accept
+            <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
+          </v-btn>
+          <v-btn class="ma-2" color="orange darken-2" nuxt to="/" dark>
+            <v-icon dark left> mdi-arrow-left </v-icon>Back
+          </v-btn>
         </v-form>
       </v-container>
     </v-card>
@@ -58,6 +71,7 @@ export default {
         (v) => v === this.password || "비밀번호가 일치하지 않습니다.",
       ],
       checkRules: [(v) => !!v || "약관에 동의해야 합니다."],
+      nicknameRules: [(v) => !!v || "닉네임은 필수입니다."],
     };
   },
   methods: {

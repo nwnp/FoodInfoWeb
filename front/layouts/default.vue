@@ -38,15 +38,18 @@
         </v-col>
       </v-row>
     </v-container>
+    <footer-form />
   </v-app>
 </template>
 
 <script>
 import LoginForm from "../components/LoginForm.vue";
+import FooterForm from "../components/FooterForm.vue";
 
 export default {
   components: {
     LoginForm,
+    FooterForm,
   },
 };
 </script>
