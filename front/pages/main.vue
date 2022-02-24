@@ -1,30 +1,116 @@
 <template>
   <v-container class="pa-4 text-center">
     <v-row class="fill-height" align="center" justify="center">
-      <template v-for="(item, i) in items">
-        <v-col :key="i" cols="12" md="4">
+      <template>
+        <v-col cols="12" md="4">
           <v-hover v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }">
-              <v-img :src="item.img" height="225px">
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              nuxt
+              to="/nutrition"
+            >
+              <v-img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtBAfrcHxuSNG47du-TEdqz7iMWSNhLubJg&usqp=CAU"
+                height="225px"
+              >
                 <v-card-title class="text-h6 white--text">
                   <v-row
                     class="fill-height flex-column"
                     justify="space-between"
                   >
-                    <p class="mt-4 subheading text-left">
-                      {{ item.title }}
-                    </p>
+                    <p class="mt-4 subheading text-left">건강기능식품</p>
 
                     <div>
                       <p
                         class="ma-0 text-body-1 font-weight-bold font-italic text-left"
                       >
-                        {{ item.text }}
+                        영양제 정보를 알려줍니다!
                       </p>
                       <p
                         class="text-caption font-weight-medium font-italic text-left"
                       >
-                        {{ item.subtext }}
+                        하루에 한 번씩 갱신
+                      </p>
+                    </div>
+                  </v-row>
+                </v-card-title>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </template>
+
+      <template>
+        <v-col cols="12" md="4">
+          <v-hover v-slot="{ hover }">
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              nuxt
+              to="/ingredient"
+            >
+              <v-img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQUpG8i06FPiTQIi__TXDtRcBmvv1L_vli3mjwtfjzimedBGj6k3DFi8DBqObtbL3ToEc&usqp=CAU"
+                height="225px"
+              >
+                <v-card-title class="text-h6 white--text">
+                  <v-row
+                    class="fill-height flex-column"
+                    justify="space-between"
+                  >
+                    <p class="mt-4 subheading text-left">식품영양성분</p>
+
+                    <div>
+                      <p
+                        class="ma-0 text-body-1 font-weight-bold font-italic text-left"
+                      >
+                        음식 재료 성분과 영양 정보를 알려줍니다!
+                      </p>
+                      <p
+                        class="text-caption font-weight-medium font-italic text-left"
+                      >
+                        얘도 하루에 한 번씩 갱신!
+                      </p>
+                    </div>
+                  </v-row>
+                </v-card-title>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </template>
+
+      <template>
+        <v-col cols="12" md="4">
+          <v-hover v-slot="{ hover }">
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              nuxt
+              to="/board"
+            >
+              <v-img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDlpE81s4NcpXz3tSQZGDEZj-DfTIgWjYgw&usqp=CAU"
+                height="225px"
+              >
+                <v-card-title class="text-h6 white--text">
+                  <v-row
+                    class="fill-height flex-column"
+                    justify="space-between"
+                  >
+                    <p class="mt-4 subheading text-left">자유게시판</p>
+
+                    <div>
+                      <p
+                        class="ma-0 text-body-1 font-weight-bold font-italic text-left"
+                      >
+                        유저들끼리의 자유로운 대화
+                      </p>
+                      <p
+                        class="text-caption font-weight-medium font-italic text-left"
+                      >
+                        서로 지식을 공유 해주세요!
                       </p>
                     </div>
                   </v-row>
@@ -40,29 +126,7 @@
 
 <script>
 export default {
-  data: () => ({
-    item: ["health", "nutrition", "board"],
-    items: [
-      {
-        title: "건강기능식품",
-        text: `영양제 정보를 알려줍니다!`,
-        subtext: "하루에 한 번씩 갱신",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtBAfrcHxuSNG47du-TEdqz7iMWSNhLubJg&usqp=CAU",
-      },
-      {
-        title: "식품영양성분",
-        text: "음식 재료 성분과 영양 정보를 알려줍니다!",
-        subtext: "얘도 하루에 한 번씩 갱신!",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQUpG8i06FPiTQIi__TXDtRcBmvv1L_vli3mjwtfjzimedBGj6k3DFi8DBqObtbL3ToEc&usqp=CAU",
-      },
-      {
-        title: "자유게시판",
-        text: "유저들끼리의 자유로운 대화",
-        subtext: "서로 지식을 공유 해주세요!",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDlpE81s4NcpXz3tSQZGDEZj-DfTIgWjYgw&usqp=CAU",
-      },
-    ],
-  }),
+  data: () => ({}),
 };
 </script>
 <style scoped>
