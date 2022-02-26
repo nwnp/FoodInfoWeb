@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="state">
     <v-card style="width: 600px">
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
         <v-container>
@@ -47,6 +47,16 @@
       </v-form>
     </v-card>
   </v-container>
+  <v-container v-else>
+    <v-card>
+      <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm2">
+        <v-container>
+          <v-card-title>Logout</v-card-title>
+          <p>{{ nickname }}님 안녕하세요 😀</p>
+        </v-container>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -62,6 +72,8 @@ export default {
         (v) => /.+@.+/.test(v) || "이메일이 유효하지 않습니다.",
       ],
       passwordRules: [(v) => !!v || "비밀번호는 필수입니다."],
+      state: false,
+      nickname: "pa12",
     };
   },
   methods: {
@@ -76,6 +88,7 @@ export default {
         }
       }
     },
+    onSubmitForm2() {},
     // onLogOut() {
     //   this.email = "";
     //   this.password = "";
