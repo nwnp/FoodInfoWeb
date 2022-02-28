@@ -148,6 +148,7 @@ export default {
         ) {
           console.log(this.searchData);
           alert("검색을 완료했습니다.");
+          this.searchData = "";
         } else {
           alert("찾고자 하는 영양제가 없습니다.");
         }

@@ -8,7 +8,7 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
               nuxt
-              to="/nutrition"
+              to="/main/nutrition"
             >
               <v-img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtBAfrcHxuSNG47du-TEdqz7iMWSNhLubJg&usqp=CAU"
@@ -48,7 +48,7 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
               nuxt
-              to="/ingredient"
+              to="/main/ingredient"
             >
               <v-img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQUpG8i06FPiTQIi__TXDtRcBmvv1L_vli3mjwtfjzimedBGj6k3DFi8DBqObtbL3ToEc&usqp=CAU"
@@ -88,7 +88,7 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
               nuxt
-              to="/board"
+              to="/main/board"
             >
               <v-img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDlpE81s4NcpXz3tSQZGDEZj-DfTIgWjYgw&usqp=CAU"
