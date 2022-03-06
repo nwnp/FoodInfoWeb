@@ -56,11 +56,17 @@
         </v-container>
       </v-form>
     </v-card>
+    <main-form />
   </v-container>
 </template>
 
 <script>
+import MainForm from "./MainForm.vue";
+
 export default {
+  components: {
+    MainForm,
+  },
   data() {
     return {
       email: "",
