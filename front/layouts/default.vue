@@ -5,7 +5,7 @@
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
           <h1>
-            <a href="/" style="text-decoration: none; color: white"
+            <a href="/main" style="text-decoration: none; color: white"
               >FoodInfo Web</a
             >
           </h1>

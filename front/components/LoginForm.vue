@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="state">
+  <v-container v-if="!me">
     <v-card style="width: 600px">
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
         <v-container>
@@ -97,7 +97,7 @@ export default {
           .then(() => {
             this.state = !this.state;
             this.$router.push({
-              path: "/",
+              path: "/main",
             });
           })
           .catch(() => {

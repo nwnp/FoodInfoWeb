@@ -1,11 +1,18 @@
 <template>
   <v-container>
     <v-app>
+      <v-card>
+        <v-card-title>hello</v-card-title>
+        <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm2">
+          <v-btn type="submit">get info</v-btn>
+        </v-form>
+        {{ this.info }}
+      </v-card>
       <v-container>
         <!-- <v-col cols="12" sm="6" md="3">
           
         </v-col> -->
-        <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
+        <!-- <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
           <v-row>
             <v-text-field
               label="검색"
@@ -26,7 +33,7 @@
               class="elevation-1"
             ></v-data-table>
           </template>
-        </v-form>
+        </v-form> -->
       </v-container>
     </v-app>
   </v-container>
@@ -132,10 +139,16 @@ export default {
           iron: "6%",
         },
       ],
+      info: "",
       dummySearchData: "Lutein",
       searchData: "",
       valid: false,
     };
+  },
+  computed: {
+    foodInfo() {
+      return this.$store.state.info.foodInfo;
+    },
   },
   methods: {
     onSubmitForm() {
@@ -152,6 +165,12 @@ export default {
         } else {
           alert("찾고자 하는 영양제가 없습니다.");
         }
+      }
+    },
+    onSubmitForm2() {
+      if (this.$refs.form.validate()) {
+        console.log("onSubmitForm2");
+        this.info = this.$store.dispatch("info/getInfo");
       }
     },
   },

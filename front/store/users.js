@@ -10,11 +10,18 @@ export const mutations = {
 
 export const actions = {
   signUp(context, payload) {
-    // this.$axios.post("http://localhost:8080/user", {
-    //   email: payload.email,
-    //   password: payload.password,
-    //   nickname: payload.nickname,
-    // });
+    this.$axios
+      .post("http://localhost:8080/users", {
+        email: payload.email,
+        password: payload.password,
+        nickname: payload.nickname,
+      })
+      .then(() => {
+        context.commit("setMe", payload);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   logIn(context, payload) {
@@ -25,7 +32,6 @@ export const actions = {
       })
       .then(() => {
         context.commit("setMe", payload);
-        console.log("actions", payload);
       })
       .catch((err) => {
         console.error(err);
