@@ -74,12 +74,24 @@ export default {
       nicknameRules: [(v) => !!v || "닉네임은 필수입니다."],
     };
   },
+  computed: {
+    me() {
+      return this.$store.state.users.me;
+    },
+  },
+  watch: {
+    me(value, oldValue) {
+      if (value) {
+        this.$router.push({
+          pah: "/",
+        });
+      }
+    },
+  },
   methods: {
     onSubmitForm() {
       if (this.$refs.form.validate()) {
-        alert("회원가입에 성공했습니다.");
-      } else {
-        alert("유효하지 않음");
+        console.log("enter");
       }
     },
   },

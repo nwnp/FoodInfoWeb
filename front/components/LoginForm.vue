@@ -56,7 +56,6 @@
         </v-container>
       </v-form>
     </v-card>
-    <main-form />
   </v-container>
 </template>
 
@@ -78,20 +77,32 @@ export default {
         (v) => /.+@.+/.test(v) || "이메일이 유효하지 않습니다.",
       ],
       passwordRules: [(v) => !!v || "비밀번호는 필수입니다."],
-      state: false,
+      state: true,
       nickname: "pa12",
     };
+  },
+  computed: {
+    me() {
+      return this.$store.state.users.me;
+    },
   },
   methods: {
     onSubmitForm() {
       if (this.$refs.form.validate()) {
-        if (this.password === this.dummyPassword) {
-          console.log(this.email);
-          console.log(this.password);
-          alert("로그인 성공!");
-        } else {
-          alert("비밀번호 틀림!");
-        }
+        this.$store
+          .dispatch("users/logIn", {
+            email: this.email,
+            password: this.password,
+          })
+          .then(() => {
+            this.state = !this.state;
+            this.$router.push({
+              path: "/",
+            });
+          })
+          .catch(() => {
+            alert("로그인 실패");
+          });
       }
     },
     onSubmitForm2() {},
