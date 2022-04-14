@@ -20,6 +20,10 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(40),
           allowNull: false,
         },
+        name: {
+          type: Sequelize.STRING(10),
+          allowNull: true,
+        },
       },
       {
         sequelize,

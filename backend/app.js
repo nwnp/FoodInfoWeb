@@ -6,9 +6,11 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const nunjucks = require("nunjucks");
+
 // passport
-// const passport = require("passport");
-// const passportConfig = require("./passport");
+const passport = require("passport");
+const passportConfig = require("./passport");
 
 const PORT = 8080;
 const app = express();
@@ -28,6 +30,14 @@ sequelize
     console.error("database connection failed", err);
   });
 
+passportConfig();
+
+app.set("view engine", "html");
+nunjucks.configure("views", {
+  express: app,
+  watch: true,
+});
+
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -44,8 +54,8 @@ app.use(
     },
   })
 );
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/users", usersRouter);
 
