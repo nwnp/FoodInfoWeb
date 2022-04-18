@@ -5,6 +5,7 @@ const ctrlUsers = require("../controller/ctrl.users.js");
 router.get("/");
 router.post("/login", ctrlUsers.login);
 router.post("/signup", ctrlUsers.signup);
+router.post("/:id/follow", ctrlUsers.follow);
 router.delete("/remove", ctrlUsers.remove);
 
 // email, password를 제외한 수정

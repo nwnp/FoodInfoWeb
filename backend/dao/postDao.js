@@ -1,12 +1,18 @@
 const { Op } = require("sequelize");
-const { Post } = require("../models/");
+const { Post, User } = require("../models/");
 
 const dao = {
   list() {
     let setQuery = {};
     setQuery.order = [["createdAt", "DESC"]];
     return new Promise((resolve, reject) => {
-      Post.findAll({ ...setQuery })
+      Post.findAll({
+        include: {
+          model: User,
+          attributes: ["id", "nickname"],
+        },
+        ...setQuery,
+      })
         .then((selectList) => {
           resolve(selectList);
         })
@@ -35,6 +41,9 @@ const dao = {
         userId: { [Op.like]: `${params.userId}` },
       };
     }
+
+    setQuery.order = [["createdAt", "DESC"]];
+
     return new Promise((resolve, reject) => {
       Post.findAll({ ...setQuery })
         .then((selectList) => {

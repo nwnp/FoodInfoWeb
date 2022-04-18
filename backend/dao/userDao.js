@@ -5,10 +5,20 @@ const dao = {
   // user가 존재하는지 check
   check(params) {
     let setQuery = {};
+
+    // email로 찾음
     if (params.email) {
       setQuery.where = {
         ...setQuery.where,
         email: { [Op.like]: `${params.email}` },
+      };
+    }
+
+    // id로 찾음
+    if (params.id) {
+      setQuery.where = {
+        ...setQuery.where,
+        id: { [Op.like]: `${params.id}` },
       };
     }
     return new Promise((resolve, reject) => {
@@ -70,6 +80,19 @@ const dao = {
       User.update(params, { ...setQuery })
         .then((updated) => {
           resolve(updated);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+
+  follow(user, params) {
+    return new Promise((resolve, reject) => {
+      user
+        .addFollowing(parseInt(params.id, 10))
+        .then((success) => {
+          resolve(success);
         })
         .catch((err) => {
           reject(err);

@@ -62,8 +62,35 @@ const service = {
         resolve(result);
       });
     } catch (error) {
-      console.error("userEdit", error);
-      return error;
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
+
+  async addFollow(params) {
+    try {
+      const followId = {
+        id: params.followId,
+      };
+      const exUser = await userDao.check(followId);
+      if (!exUser) {
+        const error = new Error("존재하지 않는 유저");
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+      const newParams = {
+        id: params.id,
+      };
+      const result = await userDao.follow(exUser, newParams);
+      return new Promise((resolve) => {
+        resolve(result);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
     }
   },
 };

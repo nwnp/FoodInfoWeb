@@ -89,10 +89,24 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
+const follow = async (req, res, next) => {
+  try {
+    const params = {
+      followId: req.body.followId,
+      id: req.params.id,
+    };
+    const result = await userService.addFollow(params);
+    return res.status(201).json({ result });
+  } catch (error) {
+    return res.status(404).json({ error: error.toString() });
+  }
+};
+
 module.exports = {
   signup,
   login,
   remove,
   edit,
   userPosts,
+  follow,
 };
