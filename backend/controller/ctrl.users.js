@@ -92,8 +92,8 @@ const login = async (req, res, next) => {
 const follow = async (req, res, next) => {
   try {
     const params = {
-      followId: req.body.followId,
-      id: req.params.id,
+      followId: req.body.followId, // follower가 될 id
+      id: req.params.id, // following을 할 id
     };
     const result = await userService.addFollow(params);
     return res.status(201).json({ result });

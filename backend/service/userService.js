@@ -73,7 +73,7 @@ const service = {
       const followId = {
         id: params.followId,
       };
-      const exUser = await userDao.check(followId);
+      const exUser = await userDao.check(followId); // follower가 될 id를 check
       if (!exUser) {
         const error = new Error("존재하지 않는 유저");
         return new Promise((resolve, reject) => {
@@ -84,6 +84,8 @@ const service = {
         id: params.id,
       };
       const result = await userDao.follow(exUser, newParams);
+      // follower가 될 user를 exUser로 넘김
+      // following을 할 id를 newParams로 넘김
       return new Promise((resolve) => {
         resolve(result);
       });
