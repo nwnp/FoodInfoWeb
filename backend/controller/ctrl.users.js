@@ -2,33 +2,21 @@ const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const userService = require("../service/userService.js");
 
 const signup = async (req, res, next) => {
   try {
-    const { email, password, location, nickname, name } = req.body;
-    const exUser = await User.findOne({ where: { email } });
-    if (!exUser) {
-      const hash = await bcrypt.hash(password, 12);
-      await User.create({
-        email,
-        password: hash,
-        location,
-        nickname,
-        name,
-      });
-      return res.status(201).json({
-        success: true,
-        msg: "가입 성공",
-      });
-    } else {
-      return res.status(401).json({
-        success: false,
-        msg: "이미 가입된 회원",
-      });
-    }
+    const params = {
+      email: req.body.email,
+      password: req.body.password,
+      location: req.body.location,
+      nickname: req.body.nickname,
+      name: req.body.name,
+    };
+    const result = await userService.signup(params);
+    return res.status(200).json({ success: true, result });
   } catch (error) {
-    console.error(`signup user error: ${error}`);
-    return next(error);
+    return res.status(400).json({ success: false, error: error.toString() });
   }
 };
 
@@ -67,19 +55,7 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
-const remove = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-    await User.destroy({ where: { email } });
-    res.status(201).json({
-      success: true,
-      msg: "회원탈퇴 성공",
-    });
-  } catch (error) {
-    console.error(`removeUser error: ${error}`);
-    return next(error);
-  }
-};
+const remove = async (req, res, next) => {};
 
 module.exports = {
   signup,
