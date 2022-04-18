@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 const service = {
-  async signup(params) {
+  async userSignup(params) {
     try {
       const exUser = await userDao.check(params);
       if (!exUser) {
@@ -13,7 +13,7 @@ const service = {
           password: hash,
         };
         const result = await userDao.signup(newParams);
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           resolve(result);
         });
       }
@@ -23,6 +23,46 @@ const service = {
         reject(error);
       });
     } catch (error) {
+      return error;
+    }
+  },
+
+  async userRemove(params) {
+    try {
+      const exUser = await userDao.check(params);
+      if (!exUser) {
+        const error = new Error("존재하지 않는 유저");
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+
+      const result = await userDao.remove(params);
+      return new Promise((resolve, reject) => {
+        resolve(result);
+      });
+    } catch (error) {
+      console.error("userRemove", error);
+      return error;
+    }
+  },
+
+  async userEdit(params) {
+    try {
+      const exUser = await userDao.check(params);
+      if (!exUser) {
+        const error = new Error("존재하지 않는 유저");
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+
+      const result = await userDao.edit(params);
+      return new Promise((resolve, reject) => {
+        resolve(result);
+      });
+    } catch (error) {
+      console.error("userEdit", error);
       return error;
     }
   },

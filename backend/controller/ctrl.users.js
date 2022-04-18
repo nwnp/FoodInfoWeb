@@ -13,13 +13,39 @@ const signup = async (req, res, next) => {
       nickname: req.body.nickname,
       name: req.body.name,
     };
-    const result = await userService.signup(params);
+    const result = await userService.userSignup(params);
     return res.status(200).json({ success: true, result });
   } catch (error) {
     return res.status(400).json({ success: false, error: error.toString() });
   }
 };
 
+const remove = async (req, res, next) => {
+  try {
+    const params = { email: req.body.email };
+    const result = await userService.userRemove(params);
+    return res.status(200).json({ success: result });
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
+};
+
+const edit = async (req, res, next) => {
+  try {
+    const params = {
+      email: req.body.email,
+      location: req.body.location,
+      nickname: req.body.nickname,
+      name: req.body.name,
+    };
+    const result = await userService.userEdit(params);
+    return res.status(200).json({ success: true, result });
+  } catch (error) {
+    console.error("edit", error);
+  }
+};
+
+// login 로직은 dao를 사용하지 않고 passport 로직 사용
 const login = async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
@@ -55,10 +81,9 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
-const remove = async (req, res, next) => {};
-
 module.exports = {
   signup,
   login,
   remove,
+  edit,
 };
