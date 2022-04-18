@@ -45,6 +45,14 @@ const edit = async (req, res, next) => {
   }
 };
 
+const userPosts = async (req, res, next) => {
+  try {
+    const params = {
+      userId: req.params.id,
+    };
+  } catch (error) {}
+};
+
 // login 로직은 dao를 사용하지 않고 passport 로직 사용
 const login = async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
@@ -86,4 +94,5 @@ module.exports = {
   login,
   remove,
   edit,
+  userPosts,
 };

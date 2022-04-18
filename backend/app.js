@@ -17,7 +17,8 @@ const app = express();
 
 dotenv.config();
 
-const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users.js");
+const postsRouter = require("./routes/posts.js");
 
 // database sequelize
 const { sequelize } = require("./models");
@@ -58,6 +59,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/users", usersRouter);
+app.use("/posts", postsRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
