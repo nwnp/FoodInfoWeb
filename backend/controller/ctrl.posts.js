@@ -1,3 +1,4 @@
+const { Post, Hashtag } = require("../models/index.js");
 const postService = require("../service/postService.js");
 
 const getPosts = async (req, res, next) => {
@@ -18,6 +19,16 @@ const registration = async (req, res, next) => {
       userId: req.body.userId,
     };
     const result = await postService.postRegistration(params);
+
+    const hashtags = params.content.match(/#[^\s#]*/g);
+    if (hashtags) {
+      const post = result;
+      const newParams = {
+        ...params,
+        post,
+      };
+      const hashResult = await postService.hashtags(newParams);
+    }
     return res.status(200).json({ result });
   } catch (error) {
     console.error("ctrl.registration error", error);

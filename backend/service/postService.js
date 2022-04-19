@@ -1,4 +1,5 @@
 const postDao = require("../dao/postDao.js");
+const { Hashtag, Post } = require("../models");
 
 const service = {
   async postsList() {
@@ -17,12 +18,25 @@ const service = {
 
   async postRegistration(params) {
     try {
-      const result = await postDao.registration(params);
+      const postResult = await postDao.registration(params);
+      return new Promise((resolve) => {
+        resolve(postResult);
+      });
+    } catch (error) {
+      console.error("post.service.postRegistration error");
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
+
+  async hashtags(params) {
+    try {
+      const result = await postDao.hashtags(params);
       return new Promise((resolve) => {
         resolve(result);
       });
     } catch (error) {
-      console.error("post.service.postRegistration error");
       return new Promise((resolve, reject) => {
         reject(error);
       });

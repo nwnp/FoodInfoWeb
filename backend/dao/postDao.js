@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Post, User } = require("../models/");
+const { Post, User, Hashtag } = require("../models/");
 
 const dao = {
   list() {
@@ -33,6 +33,24 @@ const dao = {
         });
     });
   },
+  hashtags(params) {
+    return new Promise((resolve, reject) => {
+      const hashtags = params.content.match(/#[^\s#]*/g);
+      const post = params.post;
+      const result = Promise.all(
+        hashtags.map((tag) => {
+          const title = tag.slice(1).toLowerCase();
+          return Hashtag.findOrCreate({
+            where: { title: title },
+          });
+        })
+      ).then((result) => {
+        post.addHashtags(result.map((r) => r[0])).then((res) => {
+          resolve(res);
+        });
+      });
+    });
+  },
   userPosts(params) {
     let setQuery = {};
     if (params.userId) {
@@ -41,9 +59,7 @@ const dao = {
         userId: { [Op.like]: `${params.userId}` },
       };
     }
-
     setQuery.order = [["createdAt", "DESC"]];
-
     return new Promise((resolve, reject) => {
       Post.findAll({ ...setQuery })
         .then((selectList) => {
