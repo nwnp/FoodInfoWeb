@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mysql:
+    container_name: mysql-container
+    image: mysql:8.0.22
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3304:3306"
+  foodinfo-backend:
+    build: .
+    ports:
+      - "8080:8080"

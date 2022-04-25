@@ -75,10 +75,23 @@ const postDelete = async (req, res, next) => {
   }
 };
 
+const postOfComment = async (req, res, next) => {
+  try {
+    const params = {
+      postId: req.params.id,
+    };
+    const result = await postService.postOfComment(params);
+    return res.status(200).json({ result });
+  } catch (error) {
+    return res.status(401).json({ error: error.toString() });
+  }
+};
+
 module.exports = {
   getPosts,
   registration,
   userPosts,
   postEdit,
   postDelete,
+  postOfComment,
 };

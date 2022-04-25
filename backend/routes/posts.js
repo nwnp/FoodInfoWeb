@@ -17,4 +17,7 @@ router.patch("/edit/:id", ctrlPosts.postEdit);
 // id === post.id
 router.delete("/delete/:id", ctrlPosts.postDelete);
 
+// id === post.id
+router.get("/:id/comments", ctrlPosts.postOfComment);
+
 module.exports = router;

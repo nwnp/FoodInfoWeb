@@ -83,6 +83,18 @@ const service = {
       });
     }
   },
+  async postOfComment(params) {
+    try {
+      const result = await postDao.comments(params);
+      return new Promise((resolve) => {
+        resolve(result);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
 };
 
 module.exports = service;

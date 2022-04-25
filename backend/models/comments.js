@@ -13,7 +13,7 @@ module.exports = class Commnet extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "Commnet",
+        modelName: "Comment",
         tableName: "comments",
         paranoid: true,
         charset: "utf8",

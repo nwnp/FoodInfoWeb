@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Post, User, Hashtag } = require("../models/");
+const { Post, User, Hashtag, Comment } = require("../models/");
 
 const dao = {
   list() {
@@ -101,6 +101,31 @@ const dao = {
       Post.destroy({ ...setQuery })
         .then((result) => {
           resolve(result);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+  comments(params) {
+    let setQuery = {};
+    if (params.postId) {
+      setQuery.where = {
+        ...setQuery.where,
+        id: { [Op.like]: `${params.postId}` },
+      };
+    }
+
+    return new Promise((resolve, reject) => {
+      Post.findAll({
+        include: {
+          model: Comment,
+          attributes: ["comment", "commenter"],
+        },
+        ...setQuery,
+      })
+        .then((selectList) => {
+          resolve(selectList);
         })
         .catch((err) => {
           reject(err);
