@@ -12,7 +12,7 @@ const nunjucks = require("nunjucks");
 const passport = require("passport");
 const passportConfig = require("./passport");
 
-const PORT = 8080;
+const PORT = 8081;
 const app = express();
 
 dotenv.config();
