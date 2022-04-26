@@ -23,18 +23,6 @@
       </div>
     </b-navbar>
 
-    <b-row style="background-color: #bdbdbd">
-      <b-col>
-        <b-img
-          style="display: inline-block"
-          src="https://i.picsum.photos/id/1083/5472/3648.jpg?hmac=CtOxgXc6Oe3TQvKBXtPsKVT9Z2Yg7SJKWVlgWPeMBUs"
-          width="250"
-          height="200"
-          alt="Transparent image"
-        ></b-img>
-      </b-col>
-    </b-row>
-
     <div style="margin: 15px">
       <div style="margin: 0 auto">
         <input
