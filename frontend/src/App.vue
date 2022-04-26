@@ -10,7 +10,7 @@
 
         <div v-if="!valid">
           <b-nav-item-dropdown text="로그인" right>
-            <b-dropdown-item href="/signup">회원가입</b-dropdown-item>
+            <b-dropdown-item @click="onClickSignup">회원가입</b-dropdown-item>
             <b-dropdown-item @click="onClick">로그인하기</b-dropdown-item>
           </b-nav-item-dropdown>
         </div>
@@ -77,7 +77,7 @@
       >
         <div style="margin: 3px">
           <b-avatar size="4rem"></b-avatar>
-          <p>{{ nickname }}</p>
+          <p>{{ user.nickname }}</p>
           <b-badge style="display: inline-block; margin: 3px"
             >팔로잉 {{ following }}</b-badge
           >
@@ -122,29 +122,33 @@
             style="margin: 8px"
             required
           ></b-form-input>
-          <b-button variant="primary" @click="onClickButton">LOGIN</b-button>
+          <b-button variant="primary" @click="onClickLogin">LOGIN</b-button>
         </b-form-group>
       </b-card>
     </div>
 
     <router-view />
     <loginInform />
+    <signupInform />
   </div>
 </template>
 
 <script>
 import loginInform from "./views/user/userInform.vue";
+import signupInform from "./views/user/signupInform.vue";
 
 export default {
   components: {
     loginInform: loginInform,
+    signupInform: signupInform,
   },
   data() {
     return {
+      user: {},
       valid: false,
       email: null,
       password: null,
-      nickname: "pa12",
+      // nickname: "pa12",
       following: 30,
       follower: 40,
     };
@@ -161,14 +165,16 @@ export default {
     searchUserLocalStorage() {
       if (localStorage.token) {
         this.valid = true;
+        this.user = JSON.parse(window.localStorage.getItem("token"));
       } else {
         this.valid = false;
       }
     },
     onClick() {
-      console.log("biotine");
+      // console.log("biotine");
+      this.$bvModal.show("modal-login-inform");
     },
-    onClickButton() {
+    onClickLogin() {
       const payload = {
         email: this.email,
         password: this.password,
@@ -181,6 +187,9 @@ export default {
     onClickLogout() {
       window.localStorage.removeItem("token");
       this.valid = false;
+    },
+    onClickSignup() {
+      this.$bvModal.show("modal-signup-inform");
     },
   },
 };

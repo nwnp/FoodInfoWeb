@@ -68,5 +68,15 @@ export default {
       context.commit("setLogout");
       window.localStorage.removeItem("token");
     },
+    authSignup(payload) {
+      axios
+        .post("http://localhost:8081/users/signup", payload)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
 };

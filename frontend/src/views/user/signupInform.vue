@@ -1,14 +1,14 @@
 <template>
   <div>
     <b-modal
-      id="modal-login-inform"
+      id="modal-signup-inform"
       size="sm"
       centered
-      title="LOGIN"
+      title="SIGNUP"
       @ok="onSubmit"
     >
       <div><h3 style="text-align: center">FOODINFOWEB</h3></div>
-      <b-form-group style="margin: 8px">
+      <b-form-group>
         <b-form-input
           placeholder="이메일"
           v-model="email"
@@ -22,12 +22,25 @@
           v-model="password"
           required
         ></b-form-input>
+        <b-form-input
+          placeholder="거주지역"
+          style="margin-bottom: 8px"
+          v-model="location"
+          required
+        ></b-form-input>
+        <b-form-input
+          placeholder="닉네임"
+          style="margin-bottom: 8px"
+          v-model="nickname"
+          required
+        ></b-form-input>
+        <b-form-input
+          placeholder="이름"
+          style="margin-bottom: 8px"
+          v-model="name"
+          required
+        ></b-form-input>
       </b-form-group>
-      <div style="text-align: right">
-        <b-button size="sm" style="margin: 3px" href="/finding">
-          이메일 / 비밀번호 찾기
-        </b-button>
-      </div>
     </b-modal>
   </div>
 </template>
@@ -38,6 +51,9 @@ export default {
     return {
       email: null,
       password: null,
+      location: null,
+      nickname: null,
+      name: null,
     };
   },
   methods: {
@@ -45,19 +61,17 @@ export default {
       const payload = {
         email: this.email,
         password: this.password,
+        location: this.location,
+        nickname: this.location,
+        name: this.name,
       };
-      if (payload.email == null || payload.password == null) {
-        alert("아이디와 패스워드는 필수 입력란입니다.");
-        this.email = null;
-        this.password = null;
-        return;
-      }
       this.email = null;
       this.password = null;
-      this.$store.dispatch("authLogin", payload);
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      this.location = null;
+      this.nickname = null;
+      this.name = null;
+      console.log(payload);
+      this.$store.dispatch("authSignup", payload);
     },
   },
 };
