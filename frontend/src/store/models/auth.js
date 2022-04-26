@@ -39,6 +39,11 @@ export default {
     cleanError(state) {
       state.Error = null;
     },
+    setLogout(state) {
+      state.Loading = false;
+      state.Error = null;
+      state.me = { ...stateInit.TokenUser };
+    },
   },
   actions: {
     authLogin(context, payload) {
@@ -46,7 +51,7 @@ export default {
         .post("/serverApi/users/login", payload)
         .then((res) => {
           const decodedToken = jwtDecode(res.data.token);
-          window.localStorage.setItem("token", decodedToken);
+          window.localStorage.setItem("token", JSON.stringify(decodedToken));
 
           context.commit("setLoading", false);
           context.commit("setMe", decodedToken);
@@ -57,8 +62,11 @@ export default {
           context.commit("setError", err);
         });
     },
-    // logout(context, payload) {
-    //   con;
-    // },
+    authLogout(context) {
+      context.commit("cleanError");
+      context.commit("setLoading", true);
+      context.commit("setLogout");
+      window.localStorage.removeItem("token");
+    },
   },
 };

@@ -8,7 +8,7 @@
           <b-dropdown-item href="/about">공지사항</b-dropdown-item>
         </b-dropdown>
 
-        <div v-if="me == false">
+        <div v-if="!valid">
           <b-nav-item-dropdown text="로그인" right>
             <b-dropdown-item href="/signup">회원가입</b-dropdown-item>
             <b-dropdown-item @click="onClick">로그인하기</b-dropdown-item>
@@ -16,7 +16,7 @@
         </div>
         <div v-else>
           <b-nav-item-dropdown text="나" right>
-            <b-dropdown-item href="#">로그아웃</b-dropdown-item>
+            <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
           </b-nav-item-dropdown>
         </div>
       </div>
@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div v-if="me">
+    <div v-if="valid">
       <b-card
         title="내 정보"
         tag="article"
@@ -141,7 +141,7 @@ export default {
   },
   data() {
     return {
-      // me: false,
+      valid: false,
       email: null,
       password: null,
       nickname: "pa12",
@@ -154,20 +154,33 @@ export default {
       return this.$store.getters.me;
     },
   },
+  created() {
+    this.searchUserLocalStorage();
+  },
   methods: {
+    searchUserLocalStorage() {
+      if (localStorage.token) {
+        this.valid = true;
+      } else {
+        this.valid = false;
+      }
+    },
     onClick() {
-      this.$bvModal.show("modal-login-inform");
+      console.log("biotine");
     },
     onClickButton() {
       const payload = {
         email: this.email,
         password: this.password,
       };
-      console.log(payload);
       this.$store.dispatch("authLogin", payload);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     },
     onClickLogout() {
-      this.me = null;
+      window.localStorage.removeItem("token");
+      this.valid = false;
     },
   },
 };
