@@ -64,13 +64,14 @@ const login = async (req, res, next) => {
       return res.status(404).json({ success: false, msg: info.message });
     }
     return req.login(user, (loginError) => {
-      const { email, nickname, name } = user;
+      const { id, email, nickname, name } = user;
       if (loginError) {
         return next(loginError);
       }
       let token = "";
       token = jwt.sign(
         {
+          id,
           email,
           nickname,
           name,
