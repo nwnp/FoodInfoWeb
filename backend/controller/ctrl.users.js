@@ -13,6 +13,7 @@ const signup = async (req, res, next) => {
       nickname: req.body.nickname,
       name: req.body.name,
     };
+    console.log("signup", params);
     const result = await userService.userSignup(params);
     return res.status(200).json({ success: true, result });
   } catch (error) {
