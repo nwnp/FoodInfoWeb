@@ -16,8 +16,8 @@ const routes = [
     component: () => import("../views/About.vue"),
   },
   {
-    path: "/signup",
-    component: () => import("../views/user/signup.vue"),
+    path: "/posts",
+    component: () => import("../views/post/post.vue"),
   },
   {
     path: "/finding",
