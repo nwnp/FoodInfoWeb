@@ -15,13 +15,28 @@
         </b-card>
       </b-col>
     </b-row>
+    <fab :actions="fabActions" @cache="cache" @alertMe="alert"></fab>
   </div>
 </template>
 
 <script>
+import fab from "vue-fab";
+
 export default {
+  components: {
+    fab,
+  },
   data() {
-    return {};
+    return {
+      bgColor: "#778899",
+      position: "top-right",
+      fabActions: [
+        {
+          name: "alertMe",
+          icon: "등록",
+        },
+      ],
+    };
   },
   computed: {
     PostList() {
@@ -34,6 +49,10 @@ export default {
   methods: {
     searchPostList() {
       this.$store.dispatch("actPostList");
+    },
+    alert() {
+      alert("Clicked on alert icon");
+      console.log("floating button");
     },
   },
 };
