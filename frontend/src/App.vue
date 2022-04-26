@@ -3,25 +3,12 @@
     <b-navbar toggleable type="dark" variant="dark">
       <b-navbar-brand href="/">FOODINFOWEB</b-navbar-brand>
       <div style="display: flex; flexdirection: column">
-        <!-- search 알고리즘이 완성되면 진행 -->
-        <!-- <b-nav-form>
-          <b-input-group class="mb-2">
-            <b-input-group-prepend is-text>
-              <b-icon icon="search"></b-icon>
-            </b-input-group-prepend>
-            <b-form-input
-              type="search"
-              placeholder="Search terms"
-            ></b-form-input>
-          </b-input-group>
-        </b-nav-form> -->
-
         <b-dropdown id="dropdown-1" text="페이지 이동" class="m-md-2" size="sm">
           <b-dropdown-item href="/">메인 페이지</b-dropdown-item>
           <b-dropdown-item href="/about">공지사항</b-dropdown-item>
         </b-dropdown>
 
-        <div v-if="me">
+        <div v-if="me == false">
           <b-nav-item-dropdown text="로그인" right>
             <b-dropdown-item href="/signup">회원가입</b-dropdown-item>
             <b-dropdown-item @click="onClick">로그인하기</b-dropdown-item>
@@ -34,6 +21,111 @@
         </div>
       </div>
     </b-navbar>
+
+    <b-row style="background-color: #bdbdbd">
+      <b-col>
+        <b-img
+          style="display: inline-block"
+          src="https://i.picsum.photos/id/1083/5472/3648.jpg?hmac=CtOxgXc6Oe3TQvKBXtPsKVT9Z2Yg7SJKWVlgWPeMBUs"
+          height="300"
+          alt="Transparent image"
+        ></b-img>
+      </b-col>
+    </b-row>
+
+    <div style="margin: 15px">
+      <div style="margin: 0 auto">
+        <input
+          type="text"
+          id="search"
+          style="
+            border: solid 1px;
+            border-radius: 20px;
+            width: 50%;
+            height: 40px;
+            text-align: center;
+          "
+          placeholder="음식 입력"
+        />
+        <div style="margin: 2px; width: 60%; display: inline-block">
+          <h5 style="display: inline-block; margin: 3px" @click="onClick">
+            <b-badge>#biotine</b-badge>
+          </h5>
+          <h5 style="display: inline-block; margin: 3px">
+            <b-badge>#Fe</b-badge>
+          </h5>
+          <h5 style="display: inline-block; margin: 3px">
+            <b-badge>#Maca</b-badge>
+          </h5>
+          <h5 style="display: inline-block; margin: 3px">
+            <b-badge>#아연</b-badge>
+          </h5>
+          <h5 style="display: inline-block; margin: 3px">
+            <b-badge>#Omega-3</b-badge>
+          </h5>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="me">
+      <b-card
+        title="내 정보"
+        tag="article"
+        style="max-width: 20rem; min-width: 15rem; display: inline-block"
+        class="mb-2"
+        width="20rem"
+      >
+        <div style="margin: 3px">
+          <b-avatar size="4rem"></b-avatar>
+          <p>{{ nickname }}</p>
+          <b-badge style="display: inline-block; margin: 3px"
+            >팔로잉 {{ following }}</b-badge
+          >
+          <b-badge style="display: inline-block; margin: 3px"
+            >팔로잉 {{ follower }}</b-badge
+          >
+        </div>
+        <b-button
+          style="margin: 3px"
+          variant="primary"
+          size="sm"
+          @click="onClickLogout"
+          >LOGOUT</b-button
+        >
+      </b-card>
+    </div>
+    <div v-else>
+      <b-card
+        title="로그인"
+        img-src="https://picsum.photos/600/300/?image=25"
+        img-alt="Image"
+        img-top
+        tag="article"
+        style="max-width: 20rem; display: inline-block"
+        class="mb-2"
+      >
+        <b-card-text>
+          로그인을 하지 않아도 게시글과 푸드정보를 얻을 수는 있지만, 게시글
+          등록이나 푸드마크를 할 수 없습니다.
+        </b-card-text>
+        <b-form-group>
+          <b-form-input
+            placeholder="이메일"
+            v-model="email"
+            style="margin: 8px"
+            required
+          ></b-form-input>
+          <b-form-input
+            placeholder="패스워드"
+            type="password"
+            v-model="password"
+            style="margin: 8px"
+            required
+          ></b-form-input>
+          <b-button variant="primary" @click="onClickButton">LOGIN</b-button>
+        </b-form-group>
+      </b-card>
+    </div>
 
     <router-view />
     <loginInform />
@@ -49,12 +141,33 @@ export default {
   },
   data() {
     return {
-      me: true,
+      // me: false,
+      email: null,
+      password: null,
+      nickname: "pa12",
+      following: 30,
+      follower: 40,
     };
+  },
+  computed: {
+    me() {
+      return this.$store.getters.me;
+    },
   },
   methods: {
     onClick() {
       this.$bvModal.show("modal-login-inform");
+    },
+    onClickButton() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+      console.log(payload);
+      this.$store.dispatch("authLogin", payload);
+    },
+    onClickLogout() {
+      this.me = null;
     },
   },
 };

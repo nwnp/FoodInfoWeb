@@ -1,19 +1,25 @@
 <template>
   <div>
-    <b-modal id="modal-login-inform" title="LOGIN" @ok="onSubmit">
+    <b-modal
+      id="modal-login-inform"
+      size="sm"
+      centered
+      title="LOGIN"
+      @ok="onSubmit"
+    >
       <div><h3 style="text-align: center">FOODINFOWEB</h3></div>
-      <b-form-group>
+      <b-form-group style="margin: 8px">
         <b-form-input
           placeholder="이메일"
           v-model="email"
-          style="margin: 8px"
+          style="margin-bottom: 8px"
           required
         ></b-form-input>
         <b-form-input
           placeholder="패스워드"
           type="password"
+          style="margin-bottom: 8px"
           v-model="password"
-          style="margin: 8px"
           required
         ></b-form-input>
       </b-form-group>
