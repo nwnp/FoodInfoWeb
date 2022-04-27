@@ -8,7 +8,8 @@
         >
           <div>
             <h5>제목: {{ p.title }}</h5>
-            <p>닉네임: {{ p.User.nickname }}</p>
+            <p v-if="p.User === null">탈퇴한 회원</p>
+            <p v-else>닉네임: {{ p.User.nickname }}</p>
           </div>
           <!-- <img src="" alt="" /> -->
           <b-card-text>{{ p.content }}</b-card-text>

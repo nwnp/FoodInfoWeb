@@ -68,11 +68,21 @@ export default {
       context.commit("setLogout");
       window.localStorage.removeItem("token");
     },
-    authSignup(payload) {
-      axios
-        .post("http://localhost:8081/users/signup", payload)
+    async authSignup(payload) {
+      await axios
+        .post("/serverApi/users/signup", payload)
         .then((res) => {
           console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async authRemoveUser(context, payload) {
+      await axios
+        .delete(`/serverApi/users/remove/${payload}`, payload)
+        .then(() => {
+          window.localStorage.removeItem("token");
         })
         .catch((err) => {
           console.error(err);

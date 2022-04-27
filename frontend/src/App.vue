@@ -187,14 +187,10 @@ export default {
     onClickRemove() {
       const result = confirm("회원 아이디를 탈퇴하시겠습니까?");
       if (result) {
-        const payload = {
-          email: JSON.parse(window.localStorage.getItem("token")).email,
-        };
-        window.localStorage.removeItem("token");
-        this.$store.dispatch("actRemoveUser", payload);
-        setTimeout(() => {
-          this.$router.reload();
-        }, 1000);
+        const id = JSON.parse(window.localStorage.getItem("token")).id;
+        const payload = id;
+        // console.log(typeof JSON.stringify(payload));
+        this.$store.dispatch("authRemoveUser", payload);
       }
     },
   },

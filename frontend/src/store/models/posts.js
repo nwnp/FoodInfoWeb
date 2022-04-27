@@ -42,15 +42,5 @@ export default {
           console.error(err);
         });
     },
-    async actRemoveUser(context, payload) {
-      await axios
-        .delete("http://localhost:8081/users/remove", payload)
-        .then(() => {
-          alert("회원탈퇴를 성공했습니다.");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
   },
 };
