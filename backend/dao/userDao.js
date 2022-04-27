@@ -47,10 +47,10 @@ const dao = {
   // 회원탈퇴
   remove(params) {
     let setQuery = {};
-    if (params.email) {
+    if (params.id) {
       setQuery.where = {
         ...setQuery,
-        email: { [Op.like]: `${params.email}` },
+        id: { [Op.like]: `${params.id}` },
       };
     }
     return new Promise((resolve, reject) => {

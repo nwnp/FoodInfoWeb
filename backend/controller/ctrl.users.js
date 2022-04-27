@@ -23,7 +23,8 @@ const signup = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const params = { email: req.body.email };
+    const params = { id: req.params.id };
+    console.log("req.params", params);
     const result = await userService.userRemove(params);
     return res.status(200).json({ success: result });
   } catch (error) {

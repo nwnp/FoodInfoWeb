@@ -6,7 +6,7 @@ router.get("/");
 router.post("/login", ctrlUsers.login);
 router.post("/signup", ctrlUsers.signup);
 router.post("/:id/follow", ctrlUsers.follow);
-router.delete("/remove", ctrlUsers.remove);
+router.delete("/remove/:id", ctrlUsers.remove);
 
 // email, password를 제외한 수정
 router.patch("/edit", ctrlUsers.edit);

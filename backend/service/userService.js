@@ -29,13 +29,13 @@ const service = {
 
   async userRemove(params) {
     try {
-      const exUser = await userDao.check(params);
-      if (!exUser) {
-        const error = new Error("존재하지 않는 유저");
-        return new Promise((resolve, reject) => {
-          reject(error);
-        });
-      }
+      // const exUser = await userDao.check(params);
+      // if (!exUser) {
+      //   const error = new Error("존재하지 않는 유저");
+      //   return new Promise((resolve, reject) => {
+      //     reject(error);
+      //   });
+      // }
 
       const result = await userDao.remove(params);
       return new Promise((resolve, reject) => {
