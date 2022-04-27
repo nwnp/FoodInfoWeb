@@ -51,24 +51,19 @@ export default {
   },
   watch: {
     insertedResult(value) {
-      console.log("here 1");
       if (value !== null) {
-        console.log(value);
-        if (value > 0) {
-          console.log("test");
-          this.$bvToast.toast("게시글이 등록 되었습니다.", {
-            title: "SUCCESS",
-            variant: "success",
-            solid: true,
-          });
-          this.searchPostList();
-        } else {
-          this.$bvToast.toast("게시글 등록을 실패하였습니다.", {
-            title: "ERROR",
-            variant: "danger",
-            solid: true,
-          });
-        }
+        this.$bvToast.toast("게시글이 등록 되었습니다.", {
+          title: "SUCCESS",
+          variant: "success",
+          solid: true,
+        });
+        this.searchPostList();
+      } else {
+        this.$bvToast.toast("게시글 등록을 실패하였습니다.", {
+          title: "ERROR",
+          variant: "danger",
+          solid: true,
+        });
       }
     },
   },

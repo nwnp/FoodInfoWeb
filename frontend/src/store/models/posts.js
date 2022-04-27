@@ -4,7 +4,7 @@ export default {
   state: {
     Post: null,
     PostList: [],
-    PostInsertedResult: null,
+    PostInsertedResult: {},
   },
   getters: {
     Post: (state) => state.Post,
@@ -16,7 +16,8 @@ export default {
       state.PostList = payload;
     },
     setInsertedResult(state, payload) {
-      state.PostInsertedResult = payload;
+      state.PostInsertedResult = { ...payload };
+      console.log("mutations", state.PostInsertedResult);
     },
   },
   actions: {
@@ -36,6 +37,16 @@ export default {
         .then((res) => {
           // console.log(res.data.result);
           context.commit("setInsertedResult", res.data.result);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async actRemoveUser(context, payload) {
+      await axios
+        .delete("http://localhost:8081/users/remove", payload)
+        .then(() => {
+          alert("회원탈퇴를 성공했습니다.");
         })
         .catch((err) => {
           console.error(err);

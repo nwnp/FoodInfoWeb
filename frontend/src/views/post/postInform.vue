@@ -33,16 +33,18 @@ export default {
     return {
       title: null,
       content: null,
-      userId: JSON.parse(window.localStorage.getItem("token")).id,
     };
   },
   methods: {
     onSubmit() {
+      const userId = JSON.parse(window.localStorage.getItem("token")).id;
       const payload = {
         title: this.title,
         content: this.content,
-        userId: this.userId,
+        userId: userId,
       };
+      this.title = null;
+      this.content = null;
       this.$store.dispatch("actPostInsert", payload);
     },
   },

@@ -18,6 +18,7 @@
         <div v-else>
           <b-nav-item-dropdown text="나" right>
             <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
+            <b-dropdown-item @click="onClickRemove">회원탈퇴</b-dropdown-item>
           </b-nav-item-dropdown>
         </div>
       </div>
@@ -141,6 +142,8 @@ export default {
       // nickname: "pa12",
       following: 30,
       follower: 40,
+      dismissSecs: 5,
+      dismissCountDown: 0,
     };
   },
   computed: {
@@ -180,6 +183,19 @@ export default {
     },
     onClickSignup() {
       this.$bvModal.show("modal-signup-inform");
+    },
+    onClickRemove() {
+      const result = confirm("회원 아이디를 탈퇴하시겠습니까?");
+      if (result) {
+        const payload = {
+          email: JSON.parse(window.localStorage.getItem("token")).email,
+        };
+        window.localStorage.removeItem("token");
+        this.$store.dispatch("actRemoveUser", payload);
+        setTimeout(() => {
+          this.$router.reload();
+        }, 1000);
+      }
     },
   },
 };
