@@ -6,17 +6,21 @@
           style="margin-left: 5px; margin-right: 5px; margin-bottom: 15px"
           header="게시글"
         >
-          <div>
-            <h5>제목: {{ p.title }}</h5>
+          <div @click="onClickDetail">
+            <h5 style="display: inline-block; margin-right: 4px">
+              제목: {{ p.title }}
+            </h5>
             <p v-if="p.User === null">탈퇴한 회원</p>
             <p v-else>닉네임: {{ p.User.nickname }}</p>
           </div>
           <!-- <img src="" alt="" /> -->
           <b-card-text>{{ p.content }}</b-card-text>
+          <b-table hover :items="items" :fields="fields"></b-table>
         </b-card>
       </b-col>
     </b-row>
     <fab :actions="fabActions" @alertMe="alert"></fab>
+    <!-- <detail-inform /> -->
     <post-inform />
   </div>
 </template>
@@ -24,14 +28,19 @@
 <script>
 import fab from "vue-fab";
 import PostInform from "./postInform.vue";
+// import DetailInform from "./postDetail.vue";
 
 export default {
   components: {
     fab,
     postInform: PostInform,
+    // detailInform: DetailInform,
   },
   data() {
     return {
+      fields: ["nickname", "comment"],
+      items: [{ nickname: "pa12", comment: "hi" }],
+
       bgColor: "#778899",
       position: "top-right",
       fabActions: [

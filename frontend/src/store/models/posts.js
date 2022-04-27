@@ -5,11 +5,13 @@ export default {
     Post: null,
     PostList: [],
     PostInsertedResult: {},
+    PostDetail: null,
   },
   getters: {
     Post: (state) => state.Post,
     PostList: (state) => state.PostList,
     PostInsertedResult: (state) => state.PostInsertedResult,
+    PostDetail: (state) => state.PostDetail,
   },
   mutations: {
     setPostList(state, payload) {
@@ -18,6 +20,9 @@ export default {
     setInsertedResult(state, payload) {
       state.PostInsertedResult = { ...payload };
       console.log("mutations", state.PostInsertedResult);
+    },
+    setPostDetail(state, payload) {
+      state.PostDetail = payload;
     },
   },
   actions: {
@@ -42,5 +47,6 @@ export default {
           console.error(err);
         });
     },
+    // actPostDetail(context, payload) {},
   },
 };
