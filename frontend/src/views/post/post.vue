@@ -15,7 +15,6 @@
           </div>
           <!-- <img src="" alt="" /> -->
           <b-card-text>{{ p.content }}</b-card-text>
-          <b-table hover :items="items" :fields="fields"></b-table>
         </b-card>
       </b-col>
     </b-row>
@@ -38,9 +37,6 @@ export default {
   },
   data() {
     return {
-      fields: ["nickname", "comment"],
-      items: [{ nickname: "pa12", comment: "hi" }],
-
       bgColor: "#778899",
       position: "top-right",
       fabActions: [

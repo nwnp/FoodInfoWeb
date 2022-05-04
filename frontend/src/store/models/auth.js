@@ -17,11 +17,13 @@ export default {
     me: { ...stateInit.TokenUser },
     Loading: false,
     Error: null,
+    myPostList: [],
   },
   getters: {
     me: (state) => state.me,
     loading: (state) => state.Loading,
     error: (state) => state.Error,
+    myPostList: (state) => state.myPostList,
   },
   mutations: {
     setMe(state, payload) {
@@ -43,6 +45,9 @@ export default {
       state.Loading = false;
       state.Error = null;
       state.me = { ...stateInit.TokenUser };
+    },
+    setMyPostList(state, payload) {
+      state.myPostList = payload;
     },
   },
   actions: {
@@ -83,6 +88,17 @@ export default {
         .delete(`/serverApi/users/remove/${payload}`, payload)
         .then(() => {
           window.localStorage.removeItem("token");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async authMyPostList(context, payload) {
+      await axios
+        .get(`/serverApi/posts/${payload}`)
+        .then((res) => {
+          console.log(res.data.result);
+          context.commit("setMyPostList", res.data.result);
         })
         .catch((err) => {
           console.error(err);

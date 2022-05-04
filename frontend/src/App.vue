@@ -19,6 +19,7 @@
           <b-nav-item-dropdown text="나" right>
             <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
             <b-dropdown-item @click="onClickRemove">회원탈퇴</b-dropdown-item>
+            <b-dropdown-item href="/myposts">내 게시글 보기</b-dropdown-item>
           </b-nav-item-dropdown>
         </div>
       </div>
