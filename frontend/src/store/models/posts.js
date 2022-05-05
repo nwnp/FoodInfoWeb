@@ -5,12 +5,14 @@ export default {
     Post: null,
     PostList: [],
     PostInsertedResult: {},
+    PostRemovedResult: {},
     PostDetail: null,
   },
   getters: {
     Post: (state) => state.Post,
     PostList: (state) => state.PostList,
     PostInsertedResult: (state) => state.PostInsertedResult,
+    PostRemovedResult: (state) => state.PostRemovedResult,
     PostDetail: (state) => state.PostDetail,
   },
   mutations: {
@@ -19,7 +21,9 @@ export default {
     },
     setInsertedResult(state, payload) {
       state.PostInsertedResult = { ...payload };
-      console.log("mutations", state.PostInsertedResult);
+    },
+    setRemovedResult(state, payload) {
+      state.PostRemovedResult = { ...payload };
     },
     setPostDetail(state, payload) {
       state.PostDetail = payload;
@@ -46,6 +50,27 @@ export default {
         .catch((err) => {
           console.error(err);
         });
+    },
+    async actPostRemove({ commit }, payload) {
+      await axios
+        .delete(`http://localhost:8081/posts/delete/${payload}`)
+        .then((res) => {
+          commit("setRemovedResult", res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async actPostEdit(context, payload) {
+      console.log(payload);
+      // await axios
+      //   .delete(`/serverApi/posts/delete/${payload}`)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
     },
     // actPostDetail(context, payload) {},
   },
