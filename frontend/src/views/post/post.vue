@@ -18,7 +18,8 @@
         </b-card>
       </b-col>
     </b-row>
-    <fab :actions="fabActions" @alertMe="alert"></fab>
+    <fab :actions="fabActions" @myPosts="myPosts"></fab>
+    <fab :actions="fabActions" @addPost="addPost"></fab>
     <!-- <detail-inform /> -->
     <post-inform />
   </div>
@@ -41,8 +42,12 @@ export default {
       position: "top-right",
       fabActions: [
         {
-          name: "alertMe",
+          name: "addPost",
           icon: "등록",
+        },
+        {
+          name: "myPosts",
+          icon: "MY",
         },
       ],
     };
@@ -80,8 +85,11 @@ export default {
     searchPostList() {
       this.$store.dispatch("actPostList");
     },
-    alert() {
+    addPost() {
       this.$bvModal.show("modal-post-inform");
+    },
+    myPosts() {
+      this.$router.push("/myposts");
     },
   },
 };
