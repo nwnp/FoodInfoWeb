@@ -35,11 +35,17 @@
         </b-card>
       </b-col>
     </b-row>
+    <editInform />
   </div>
 </template>
 
 <script>
+import EditInform from "./editPostInform.vue";
+
 export default {
+  components: {
+    editInform: EditInform,
+  },
   data() {
     return {
       postId: null,
@@ -51,6 +57,9 @@ export default {
     },
     removedResult() {
       return this.$store.getters.PostRemovedResult;
+    },
+    updatedResult() {
+      return this.$store.getters.PostUpdatedResult;
     },
   },
   created() {
@@ -73,21 +82,39 @@ export default {
         });
       }
     },
+    updatedResult(value) {
+      if (value !== null) {
+        this.$bvToast.toast("게시글 수정이 되었습니다.", {
+          title: "SUCCESS",
+          variant: "success",
+          solid: true,
+        });
+        this.searchMyPostList();
+      } else {
+        this.$bvToast.toast("게시글 수정을 실패하였습니다.", {
+          title: "ERROR",
+          variant: "danger",
+          solid: true,
+        });
+      }
+    },
   },
   methods: {
+    editPost(index) {
+      this.$store.dispatch("actPostNumber", this.myPostList[index].id);
+      this.$bvModal.show("modal-edit-inform");
+    },
     searchMyPostList() {
       const userId = JSON.parse(window.localStorage.getItem("token"))["id"];
       this.$store.dispatch("authMyPostList", userId);
     },
     removePost(index) {
-      const postId = this.myPostList[index].id;
-      console.log(postId);
-      this.$store.dispatch("actPostRemove", postId);
-    },
-    editPost(index) {
-      const postId = this.myPostList[index].id;
-      console.log(postId);
-      // this.$store.dispatch("actPostEdit", postId);
+      const result = confirm("게시글을 삭제 하시겠습니까?");
+      if (result) {
+        const postId = this.myPostList[index].id;
+        console.log(postId);
+        this.$store.dispatch("actPostRemove", postId);
+      }
     },
   },
 };

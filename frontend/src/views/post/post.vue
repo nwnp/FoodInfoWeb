@@ -18,7 +18,6 @@
         </b-card>
       </b-col>
     </b-row>
-    <fab :actions="fabActions" @myPosts="myPosts"></fab>
     <fab :actions="fabActions" @addPost="addPost"></fab>
     <!-- <detail-inform /> -->
     <post-inform />
@@ -28,13 +27,11 @@
 <script>
 import fab from "vue-fab";
 import PostInform from "./postInform.vue";
-// import DetailInform from "./postDetail.vue";
 
 export default {
   components: {
     fab,
     postInform: PostInform,
-    // detailInform: DetailInform,
   },
   data() {
     return {
@@ -44,10 +41,6 @@ export default {
         {
           name: "addPost",
           icon: "등록",
-        },
-        {
-          name: "myPosts",
-          icon: "MY",
         },
       ],
     };
@@ -87,9 +80,6 @@ export default {
     },
     addPost() {
       this.$bvModal.show("modal-post-inform");
-    },
-    myPosts() {
-      this.$router.push("/myposts");
     },
   },
 };
