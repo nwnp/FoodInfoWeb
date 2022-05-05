@@ -97,7 +97,6 @@ export default {
       await axios
         .get(`/serverApi/posts/${payload}`)
         .then((res) => {
-          console.log(res.data.result);
           context.commit("setMyPostList", res.data.result);
         })
         .catch((err) => {

@@ -57,7 +57,6 @@ export default {
       await axios
         .post("http://localhost:8081/posts/registration", payload)
         .then((res) => {
-          // console.log(res.data.result);
           context.commit("setInsertedResult", res.data.result);
         })
         .catch((err) => {
@@ -79,13 +78,11 @@ export default {
       await axios
         .patch(`http://localhost:8081/posts/edit/${payload.id}`, payload)
         .then((res) => {
-          console.log(res);
           commit("setUpdatedResult", res);
         })
         .catch((err) => {
           console.error(err);
         });
     },
-    // actPostDetail(context, payload) {},
   },
 };

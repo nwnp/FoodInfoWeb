@@ -112,7 +112,6 @@ export default {
       const result = confirm("게시글을 삭제 하시겠습니까?");
       if (result) {
         const postId = this.myPostList[index].id;
-        console.log(postId);
         this.$store.dispatch("actPostRemove", postId);
       }
     },
