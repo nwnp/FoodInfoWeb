@@ -28,6 +28,10 @@ const routes = [
     component: () => import("../views/user/myPosts.vue"),
   },
   {
+    path: "/posts/detail",
+    component: () => import("../views/post/postDetail.vue"),
+  },
+  {
     path: "/*",
     component: () => import("../components/NotFound.vue"),
   },

@@ -4,24 +4,33 @@ export default {
   state: {
     Post: null,
     PostList: [],
+    CommentList: [],
     PostInsertedResult: {},
     PostRemovedResult: {},
     PostUpdatedResult: {},
     PostDetail: null,
     PostNumber: null,
+    PostTitle: null,
+    PostContent: null,
   },
   getters: {
     Post: (state) => state.Post,
     PostList: (state) => state.PostList,
+    CommentList: (state) => state.CommentList,
     PostInsertedResult: (state) => state.PostInsertedResult,
     PostRemovedResult: (state) => state.PostRemovedResult,
     PostUpdatedResult: (state) => state.PostUpdatedResult,
     PostDetail: (state) => state.PostDetail,
     PostNumber: (state) => state.PostNumber,
+    PostTitle: (state) => state.PostTitle,
+    PostContent: (state) => state.PostContent,
   },
   mutations: {
     setPostList(state, payload) {
       state.PostList = payload;
+    },
+    setCommentList(state, payload) {
+      state.CommentList = payload;
     },
     setInsertedResult(state, payload) {
       state.PostInsertedResult = { ...payload };
@@ -37,6 +46,13 @@ export default {
     },
     setPostNumber(state, payload) {
       state.PostNumber = payload;
+      window.sessionStorage.setItem("number", payload);
+    },
+    setPostTitle(state, payload) {
+      state.PostTitle = payload;
+    },
+    setPostContent(state, payload) {
+      state.PostContent = payload;
     },
   },
   actions: {
@@ -74,11 +90,31 @@ export default {
         });
     },
     async actPostEdit({ commit }, payload) {
-      console.log(payload);
       await axios
         .patch(`http://localhost:8081/posts/edit/${payload.id}`, payload)
         .then((res) => {
           commit("setUpdatedResult", res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async actCommentList({ commit }, payload) {
+      await axios
+        .get(`http://localhost:8081/posts/${payload}/comments`)
+        .then((res) => {
+          commit("setCommentList", res.data.result);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async actTitle({ commit }, payload) {
+      await axios
+        .get(`http://localhost:8081/posts/${payload}/comments/title`)
+        .then((res) => {
+          commit("setPostTitle", res.data.result[0].title);
+          commit("setPostContent", res.data.result[0].content);
         })
         .catch((err) => {
           console.error(err);
