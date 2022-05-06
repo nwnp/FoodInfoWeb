@@ -118,10 +118,6 @@ const dao = {
 
     return new Promise((resolve, reject) => {
       Post.findAll({
-        include: {
-          model: Comment,
-          attributes: ["comment", "commenter"],
-        },
         ...setQuery,
       })
         .then((selectList) => {
@@ -129,6 +125,45 @@ const dao = {
         })
         .catch((err) => {
           reject(err);
+        });
+    });
+  },
+
+  commentRegistration(params) {
+    return new Promise((resolve, reject) => {
+      Comment.create(params)
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+
+  nickname(params) {
+    let setQuery = {};
+    if (params.postId) {
+      setQuery.where = {
+        ...setQuery.where,
+        postId: { [Op.like]: `${params.postId}` },
+      };
+    }
+    return new Promise((resolve, reject) => {
+      Comment.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["id", "nickname"],
+          },
+        ],
+        ...setQuery,
+      })
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((error) => {
+          reject(error);
         });
     });
   },

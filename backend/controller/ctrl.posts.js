@@ -80,7 +80,35 @@ const postOfComment = async (req, res, next) => {
     const params = {
       postId: req.params.id,
     };
+    // const commentResult = await postService.postOfComment(params);
+    let result = await postService.nicknameOfPost(params);
+    // result = { ...result, ...commentResult };
+    return res.status(200).json({ result });
+  } catch (error) {
+    return res.status(401).json({ error: error.toString() });
+  }
+};
+
+const titleAndContent = async (req, res, next) => {
+  try {
+    const params = {
+      postId: req.params.id,
+    };
     const result = await postService.postOfComment(params);
+    return res.status(200).json({ result });
+  } catch (error) {
+    return res.status(401).json({ error: error.toString() });
+  }
+};
+
+const commentRegistration = async (req, res, next) => {
+  try {
+    const params = {
+      commenter: req.body.userId,
+      postId: req.body.postId,
+      comment: req.body.comment,
+    };
+    const result = await postService.postComment(params);
     return res.status(200).json({ result });
   } catch (error) {
     return res.status(401).json({ error: error.toString() });
@@ -94,4 +122,6 @@ module.exports = {
   postEdit,
   postDelete,
   postOfComment,
+  commentRegistration,
+  titleAndContent,
 };

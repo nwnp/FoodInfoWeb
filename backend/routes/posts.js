@@ -20,4 +20,9 @@ router.delete("/delete/:id", ctrlPosts.postDelete);
 // id === post.id
 router.get("/:id/comments", ctrlPosts.postOfComment);
 
+// 댓글 등록
+router.post("/comment", ctrlPosts.commentRegistration);
+
+router.get("/:id/comments/title", ctrlPosts.titleAndContent);
+
 module.exports = router;

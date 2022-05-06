@@ -95,6 +95,30 @@ const service = {
       });
     }
   },
+  async postComment(params) {
+    try {
+      const result = await postDao.commentRegistration(params);
+      return new Promise((resolve) => {
+        resolve(result);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
+  async nicknameOfPost(params) {
+    try {
+      const result = await postDao.nickname(params);
+      return new Promise((resolve) => {
+        resolve(result);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
 };
 
 module.exports = service;
