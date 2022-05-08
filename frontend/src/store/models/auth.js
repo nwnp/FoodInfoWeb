@@ -18,16 +18,21 @@ export default {
     Loading: false,
     Error: null,
     myPostList: [],
+    UpdatedUser: null,
   },
   getters: {
     me: (state) => state.me,
     loading: (state) => state.Loading,
     error: (state) => state.Error,
     myPostList: (state) => state.myPostList,
+    UpdatedUser: (state) => state.UpdatedUser,
   },
   mutations: {
     setMe(state, payload) {
       state.me = payload;
+    },
+    setUpdatedUser(state, payload) {
+      state.UpdatedUser = payload;
     },
     setLoading(state, payload) {
       state.Loading = payload;
@@ -98,6 +103,17 @@ export default {
         .get(`/serverApi/posts/${payload}`)
         .then((res) => {
           context.commit("setMyPostList", res.data.result);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    async actUserEdit({ commit }, payload) {
+      await axios
+        .patch("http://localhost:8081/users/edit", payload)
+        .then((res) => {
+          commit("setUpdatedUser", res.data.result);
         })
         .catch((err) => {
           console.error(err);

@@ -125,7 +125,6 @@ export default {
           console.error(err);
         });
     },
-    // eslint-disable-next-line no-unused-vars
     async actComment({ commit }, payload) {
       console.log("action comment register", payload);
       await axios

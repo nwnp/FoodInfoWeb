@@ -20,6 +20,7 @@
             <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
             <b-dropdown-item @click="onClickRemove">회원탈퇴</b-dropdown-item>
             <b-dropdown-item href="/myposts">내 게시글 보기</b-dropdown-item>
+            <b-dropdown-item @click="onClickEdit">내 정보 수정</b-dropdown-item>
           </b-nav-item-dropdown>
         </div>
       </div>
@@ -122,17 +123,20 @@
     <router-view />
     <loginInform />
     <signupInform />
+    <editInform />
   </div>
 </template>
 
 <script>
 import loginInform from "./views/user/userInform.vue";
 import signupInform from "./views/user/signupInform.vue";
+import editInform from "./views/user/editInform.vue";
 
 export default {
   components: {
     loginInform: loginInform,
     signupInform: signupInform,
+    editInform: editInform,
   },
   data() {
     return {
@@ -150,6 +154,27 @@ export default {
   computed: {
     me() {
       return this.$store.getters.me;
+    },
+    UpdatedUser() {
+      return this.$store.getters.UpdatedUser;
+    },
+  },
+  watch: {
+    UpdatedUser(value) {
+      if (value !== null) {
+        this.$bvToast.toast("회원정보 수정이 되었습니다.", {
+          title: "SUCCESS",
+          variant: "success",
+          solid: true,
+        });
+        this.searchPostList();
+      } else {
+        this.$bvToast.toast("수정을 실패하였습니다.", {
+          title: "ERROR",
+          variant: "danger",
+          solid: true,
+        });
+      }
     },
   },
   created() {
@@ -184,6 +209,9 @@ export default {
     },
     onClickSignup() {
       this.$bvModal.show("modal-signup-inform");
+    },
+    onClickEdit() {
+      this.$bvModal.show("modal-user-edit-inform");
     },
     onClickRemove() {
       const result = confirm("회원 아이디를 탈퇴하시겠습니까?");
