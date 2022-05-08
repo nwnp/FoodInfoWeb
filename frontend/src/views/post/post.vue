@@ -8,11 +8,7 @@
         v-for="(p, index) in PostList"
         :key="(p, index)"
       >
-        <div
-          @click="onClickDetail(index)"
-          v-b-popover.hover="'Click me!!'"
-          title="댓글 보기"
-        >
+        <div>
           <b-card
             style="
               margin-left: 5px;
@@ -22,18 +18,68 @@
             "
             header="게시글"
           >
-            <div>
-              <h5 style="display: inline-block; margin-right: 4px">
-                제목: {{ p.title }}
-              </h5>
+            <div
+              @click="onClickDetail(index)"
+              v-b-popover.hover="'Click me!!'"
+              title="댓글 보기"
+            >
               <div>
-                <p v-if="p.User === null">탈퇴한 회원</p>
-                <p v-else>닉네임: {{ p.User.nickname }}</p>
-                <p style="display: none">({{ index }})</p>
+                <h5 style="display: inline-block; margin-right: 4px">
+                  제목: {{ p.title }}
+                </h5>
+                <div>
+                  <p v-if="p.User === null">탈퇴한 회원</p>
+                  <p v-else>닉네임: {{ p.User.nickname }}</p>
+                  <p style="display: none">({{ index }})</p>
+                </div>
+              </div>
+              <!-- <img src="" alt="" /> -->
+              <b-card-text>{{ p.content }}</b-card-text>
+            </div>
+            <div>
+              <div style="display: inline-block; margin: 5px">
+                <div>
+                  <b-button
+                    v-if="like"
+                    variant="outline-primary"
+                    size="sm"
+                    @click="onClickLike"
+                  >
+                    <b-icon icon="heart-fill"></b-icon>
+                    <div>좋아요</div>
+                  </b-button>
+                  <b-button
+                    v-else
+                    variant="outline-primary"
+                    size="sm"
+                    @click="onClickLike"
+                  >
+                    <b-icon icon="heart"></b-icon>
+                    <div>좋아요</div>
+                  </b-button>
+                </div>
+              </div>
+              <div style="display: inline-block; margin: 5px">
+                <b-button
+                  v-if="hate"
+                  variant="outline-danger"
+                  size="sm"
+                  @click="onClickHate"
+                >
+                  <b-icon icon="x-circle-fill"></b-icon>
+                  <div>싫어요</div>
+                </b-button>
+                <b-button
+                  v-else
+                  variant="outline-danger"
+                  size="sm"
+                  @click="onClickHate"
+                >
+                  <b-icon icon="x-circle"></b-icon>
+                  <div>싫어요</div>
+                </b-button>
               </div>
             </div>
-            <!-- <img src="" alt="" /> -->
-            <b-card-text>{{ p.content }}</b-card-text>
           </b-card>
         </div>
       </b-col>
@@ -56,6 +102,8 @@ export default {
   },
   data() {
     return {
+      like: false,
+      hate: false,
       bgColor: "#778899",
       position: "top-right",
       isHovered: false,
@@ -114,6 +162,14 @@ export default {
       this.$store.dispatch("actPostNumber", this.PostList[index].id);
       this.$store.dispatch("actCommentList", this.PostList[index].id);
       this.$router.push("/posts/detail");
+    },
+    onClickLike() {
+      console.log("click like");
+      this.like = !this.like;
+    },
+    onClickHate() {
+      console.log("click hate");
+      this.hate = !this.hate;
     },
   },
 };

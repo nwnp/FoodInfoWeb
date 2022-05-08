@@ -16,12 +16,17 @@
           </b-nav-item-dropdown>
         </div>
         <div v-else>
-          <b-nav-item-dropdown text="나" right>
-            <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
-            <b-dropdown-item @click="onClickRemove">회원탈퇴</b-dropdown-item>
-            <b-dropdown-item href="/myposts">내 게시글 보기</b-dropdown-item>
-            <b-dropdown-item @click="onClickEdit">내 정보 수정</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-button size="sm">
+            <b-icon icon="person-fill" />
+            <b-dropdown text="Accounts" right>
+              <b-dropdown-item @click="onClickLogout">로그아웃</b-dropdown-item>
+              <b-dropdown-item @click="onClickRemove">회원탈퇴</b-dropdown-item>
+              <b-dropdown-item href="/myposts">내 게시글 보기</b-dropdown-item>
+              <b-dropdown-item @click="onClickEdit"
+                >내 정보 수정</b-dropdown-item
+              >
+            </b-dropdown>
+          </b-button>
         </div>
       </div>
     </b-navbar>
@@ -79,12 +84,13 @@
           >
         </div>
         <b-button
-          style="margin: 3px"
-          variant="primary"
-          size="sm"
           @click="onClickLogout"
-          >LOGOUT</b-button
+          style="margin: 3px"
+          variant="outline-info"
+          class="mb-2"
         >
+          <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+        </b-button>
       </b-card>
     </div>
     <div v-else>
