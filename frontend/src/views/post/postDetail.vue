@@ -23,8 +23,19 @@
           placeholder="댓글 달기"
           v-model="comment"
         ></b-form-textarea>
-        <b-button size="sm" variant="info" @click="onSubmit"
+        <b-button
+          size="sm"
+          variant="info"
+          @click="onSubmit"
+          style="margin: 10px"
           >댓글 달기</b-button
+        >
+        <b-button
+          size="sm"
+          variant="outline-primary"
+          @click="onSubmitCancel"
+          style="margin: 10px"
+          >나가기</b-button
         >
       </div>
     </div>
@@ -88,6 +99,9 @@ export default {
       };
       this.comment = null;
       this.$store.dispatch("actComment", payload);
+    },
+    onSubmitCancel() {
+      this.$router.push("/posts");
     },
     searchCommentList() {
       this.$store.dispatch(
