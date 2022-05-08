@@ -30,7 +30,7 @@
         <hr />
         <div>
           🔥 우선순위 🔥 음식 정보 가져오기 ➡️ hashtag ➡️ Following/Follower ➡️
-          회원수정
+          푸드마크 ➡️ 뱃지등록 ➡️ 푸드 찾기
         </div>
       </b-card-text>
     </b-card>
