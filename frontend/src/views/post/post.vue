@@ -104,7 +104,11 @@ export default {
       this.$store.dispatch("actPostList");
     },
     addPost() {
-      this.$bvModal.show("modal-post-inform");
+      if (!window.localStorage.getItem("token")) {
+        alert("로그인 후 게시글 등록을 할 수 있습니다.");
+      } else {
+        this.$bvModal.show("modal-post-inform");
+      }
     },
     onClickDetail(index) {
       this.$store.dispatch("actPostNumber", this.PostList[index].id);

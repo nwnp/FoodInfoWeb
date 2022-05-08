@@ -69,9 +69,6 @@ export default {
   created() {
     this.searchCommentList();
   },
-  destroyed() {
-    this.removeSession();
-  },
   watch: {
     InsertedComment(value) {
       if (value !== null) {
@@ -92,15 +89,21 @@ export default {
   },
   methods: {
     onSubmit() {
-      const payload = {
-        postId: Number(window.sessionStorage.getItem("number")),
-        userId: JSON.parse(window.localStorage.getItem("token"))["id"],
-        comment: this.comment,
-      };
-      this.comment = null;
-      this.$store.dispatch("actComment", payload);
+      if (!window.localStorage.getItem("token")) {
+        alert("로그인 후 댓글 등록할 수 있습니다.");
+        this.comment = null;
+      } else {
+        const payload = {
+          postId: Number(window.sessionStorage.getItem("number")),
+          userId: JSON.parse(window.localStorage.getItem("token"))["id"],
+          comment: this.comment,
+        };
+        this.comment = null;
+        this.$store.dispatch("actComment", payload);
+      }
     },
     onSubmitCancel() {
+      window.sessionStorage.clear();
       this.$router.push("/posts");
     },
     searchCommentList() {
@@ -109,9 +112,6 @@ export default {
         window.sessionStorage.getItem("number")
       );
       this.$store.dispatch("actTitle", window.sessionStorage.getItem("number"));
-    },
-    removeSession() {
-      window.sessionStorage.clear();
     },
   },
 };
