@@ -12,6 +12,7 @@ export default {
     PostNumber: null,
     PostTitle: null,
     PostContent: null,
+    InsertedComment: null,
   },
   getters: {
     Post: (state) => state.Post,
@@ -24,6 +25,7 @@ export default {
     PostNumber: (state) => state.PostNumber,
     PostTitle: (state) => state.PostTitle,
     PostContent: (state) => state.PostContent,
+    InsertedComment: (state) => state.InsertedComment,
   },
   mutations: {
     setPostList(state, payload) {
@@ -53,6 +55,9 @@ export default {
     },
     setPostContent(state, payload) {
       state.PostContent = payload;
+    },
+    setInsertedComment(state, payload) {
+      state.InsertedComment = payload;
     },
   },
   actions: {
@@ -115,6 +120,18 @@ export default {
         .then((res) => {
           commit("setPostTitle", res.data.result[0].title);
           commit("setPostContent", res.data.result[0].content);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    async actComment({ commit }, payload) {
+      console.log("action comment register", payload);
+      await axios
+        .post("http://localhost:8081/posts/comment", payload)
+        .then((res) => {
+          commit("setInsertedComment", res.data.result);
         })
         .catch((err) => {
           console.error(err);

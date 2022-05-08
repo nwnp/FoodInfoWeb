@@ -16,12 +16,13 @@
             <p style="display: inline-block">{{ p.comment }}</p>
           </div>
         </b-card>
-        <b-card>
-          <!-- <b-rows v-for="c in CommentList"></b-rows> -->
-        </b-card>
       </div>
       <div>
-        <b-form-textarea style="margin: 5px"></b-form-textarea>
+        <b-form-textarea
+          style="margin: 5px"
+          placeholder="댓글 달기"
+          v-model="comment"
+        ></b-form-textarea>
         <b-button size="sm" variant="info" @click="onSubmit"
           >댓글 달기</b-button
         >
@@ -32,6 +33,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      comment: null,
+    };
+  },
   computed: {
     PostNumber() {
       return this.$store.getters.PostNumber;
@@ -45,6 +51,9 @@ export default {
     PostContent() {
       return this.$store.getters.PostContent;
     },
+    InsertedComment() {
+      return this.$store.getters.InsertedComment;
+    },
   },
   created() {
     this.searchCommentList();
@@ -52,9 +61,33 @@ export default {
   destroyed() {
     this.removeSession();
   },
+  watch: {
+    InsertedComment(value) {
+      if (value !== null) {
+        this.$bvToast.toast("댓글을 등록 했습니다.", {
+          title: "SUCCESS",
+          variant: "success",
+          solid: true,
+        });
+        this.searchCommentList();
+      } else {
+        this.$bvToast.toast("댓글 등록을 실패하였습니다.", {
+          title: "ERROR",
+          variant: "danger",
+          solid: true,
+        });
+      }
+    },
+  },
   methods: {
     onSubmit() {
-      console.log("post detail");
+      const payload = {
+        postId: Number(window.sessionStorage.getItem("number")),
+        userId: JSON.parse(window.localStorage.getItem("token"))["id"],
+        comment: this.comment,
+      };
+      this.comment = null;
+      this.$store.dispatch("actComment", payload);
     },
     searchCommentList() {
       this.$store.dispatch(
