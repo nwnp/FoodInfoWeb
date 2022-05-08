@@ -11,18 +11,20 @@
       <b-card-text>
         <div>
           <ul>
+            <li>🚨 bug 🚨 회원가입이 안됨;;;;</li>
+            <li>🌠🌠🌠🌠🌠 OpenAPI 이용해서 음식 정보 가져오기 🌠🌠🌠🌠🌠</li>
             <li>Hashtag 기능</li>
-            <li>로그인을 해야지 게시글 등록 가능</li>
             <li>팔로우/팔로잉 기능</li>
-            <li>댓글 기능</li>
-            <li>게시글 삭제 기능</li>
-            <li>게시글 수정 기능</li>
             <li>유저 수정 기능</li>
             <li>음식 찾기 기능(back-end X)</li>
             <li>뱃지 등록 기능(back-end X)</li>
             <li>푸드마크(북마크 응용) 등록 기능(back-end X)</li>
             <li>8/15 ~ 8/31까지</li>
           </ul>
+        </div>
+        <div>
+          🔥 우선순위 🔥 음식 정보 가져오기 ➡️ hashtag ➡️ Following/Follower ➡️
+          회원수정
         </div>
       </b-card-text>
     </b-card>
