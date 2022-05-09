@@ -38,9 +38,5 @@ module.exports = class Post extends Sequelize.Model {
       as: "Hashtags",
       through: "PostHashtag",
     });
-
-    // 좋아요/싫어요
-    db.Post.belongsToMany(db.User, { through: "LikePost" });
-    db.Post.belongsToMany(db.User, { through: "HatePost" });
   }
 };
