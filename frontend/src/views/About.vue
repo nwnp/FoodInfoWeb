@@ -17,6 +17,7 @@
             <li>Hashtag 기능</li>
             <li>팔로우/팔로잉 기능</li>
             <li>🌠🌠🌠🌠🌠 OpenAPI 이용해서 음식 정보 가져오기 🌠🌠🌠🌠🌠</li>
+            <li>배포 & CI/CD 구축</li>
           </ul>
           <hr />
           <ul>
