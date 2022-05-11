@@ -20,18 +20,14 @@
           </ul>
           <hr />
           <ul>
-            <h4 style="color: #91baae"><i>위에 기능 다 끝내고</i></h4>
+            <h4 style="color: #91baae"><i>아직 미정</i></h4>
             <li>음식 찾기 기능(back-end X)</li>
             <li>뱃지 등록 기능(back-end X)</li>
             <li>푸드마크(북마크 응용) 등록 기능(back-end X)</li>
-            <li>8/15 ~ 8/31까지</li>
           </ul>
         </div>
+        <h4>8/15 ~ 8/31까지 끝내기!!!!!</h4>
         <hr />
-        <div>
-          🔥 우선순위 🔥 음식 정보 가져오기 ➡️ hashtag ➡️ Following/Follower ➡️
-          푸드마크 ➡️ 뱃지등록 ➡️ 푸드 찾기
-        </div>
       </b-card-text>
     </b-card>
   </div>
