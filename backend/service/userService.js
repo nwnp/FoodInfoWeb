@@ -95,6 +95,22 @@ const service = {
       });
     }
   },
+
+  async followList(params) {
+    try {
+      const followId = {
+        id: params.followId,
+      };
+      const result = await userDao.followList(followId);
+      return new Promise((resolve) => {
+        resolve(result);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  },
 };
 
 module.exports = service;

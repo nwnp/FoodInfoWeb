@@ -17,9 +17,6 @@ const app = express();
 
 dotenv.config();
 
-const usersRouter = require("./routes/users.js");
-const postsRouter = require("./routes/posts.js");
-
 // database sequelize
 const { sequelize } = require("./models");
 sequelize
@@ -45,6 +42,7 @@ app.use(cors("http://localhost:8080"));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
@@ -60,6 +58,9 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+const usersRouter = require("./routes/users.js");
+const postsRouter = require("./routes/posts.js");
 
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);

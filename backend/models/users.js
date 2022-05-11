@@ -55,9 +55,5 @@ module.exports = class User extends Sequelize.Model {
       as: "Followings",
       through: "Follow",
     });
-
-    // 좋아요/싫어요
-    db.User.belongsToMany(db.Post, { through: "LikePost" });
-    db.User.belongsToMany(db.Post, { through: "HatePost" });
   }
 };

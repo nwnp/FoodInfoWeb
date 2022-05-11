@@ -66,7 +66,7 @@ export default {
     },
     async actPostList(context) {
       await axios
-        .get("/serverApi/posts")
+        .get("http://localhost:8081/posts")
         .then((res) => {
           context.commit("setPostList", res.data.result);
         })

@@ -27,13 +27,21 @@
                 제목: {{ p.title }}
               </h5>
               <div>
-                <p v-if="p.User === null">탈퇴한 회원</p>
-                <p v-else>닉네임: {{ p.User.nickname }}</p>
                 <p style="display: none">({{ index }})</p>
               </div>
             </div>
-            <!-- <img src="" alt="" /> -->
             <b-card-text>{{ p.content }}</b-card-text>
+          </div>
+          <div>
+            <p v-if="p.User === null">탈퇴한 회원</p>
+            <div v-else>
+              <p style="display: inline-block; margin: 4px">
+                {{ p.User.nickname }}
+              </p>
+              <b-badge variant="secondary" @click="onFollow(p.User.id)"
+                >팔로우하기</b-badge
+              >
+            </div>
           </div>
         </b-card>
       </b-col>
@@ -117,13 +125,14 @@ export default {
       this.$store.dispatch("actCommentList", this.PostList[index].id);
       this.$router.push("/posts/detail");
     },
-    onClickLike() {
-      console.log("click like");
-      this.like = !this.like;
-    },
-    onClickHate() {
-      console.log("click hate");
-      this.hate = !this.hate;
+    onFollow(userId) {
+      const id = userId;
+      const followerId = JSON.parse(window.localStorage.getItem("token")).id;
+      const payload = {
+        id,
+        followerId,
+      };
+      this.$store.dispatch("actUserFollow", payload);
     },
   },
 };

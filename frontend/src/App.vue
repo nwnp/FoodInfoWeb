@@ -77,7 +77,7 @@
           <b-avatar size="4rem"></b-avatar>
           <p>{{ user.nickname }}</p>
           <b-badge style="display: inline-block; margin: 3px"
-            >팔로잉 {{ following }}</b-badge
+            >팔로잉 {{ FollowList }}</b-badge
           >
           <b-badge style="display: inline-block; margin: 3px"
             >팔로잉 {{ follower }}</b-badge
@@ -163,6 +163,9 @@ export default {
     },
     UpdatedUser() {
       return this.$store.getters.UpdatedUser;
+    },
+    FollowList() {
+      return this.$store.getters.FollowList;
     },
   },
   watch: {

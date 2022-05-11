@@ -19,6 +19,7 @@ export default {
     Error: null,
     myPostList: [],
     UpdatedUser: null,
+    FollowList: null,
   },
   getters: {
     me: (state) => state.me,
@@ -26,6 +27,7 @@ export default {
     error: (state) => state.Error,
     myPostList: (state) => state.myPostList,
     UpdatedUser: (state) => state.UpdatedUser,
+    FollowList: (state) => state.FollowList,
   },
   mutations: {
     setMe(state, payload) {
@@ -53,6 +55,9 @@ export default {
     },
     setMyPostList(state, payload) {
       state.myPostList = payload;
+    },
+    setFollowList(state, payload) {
+      state.FollowList = payload;
     },
   },
   actions: {
@@ -108,12 +113,25 @@ export default {
           console.error(err);
         });
     },
-    // eslint-disable-next-line no-unused-vars
     async actUserEdit({ commit }, payload) {
       await axios
         .patch("http://localhost:8081/users/edit", payload)
         .then((res) => {
           commit("setUpdatedUser", res.data.result);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    async actUserFollow({ commit }, payload) {
+      await axios
+        .post(
+          `http://localhost:8081/users/${payload.id}/${payload.followerId}/follow`,
+          9
+        )
+        .then((res) => {
+          commit("setFollowList", res.result);
         })
         .catch((err) => {
           console.error(err);

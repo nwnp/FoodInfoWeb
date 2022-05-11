@@ -57,6 +57,7 @@ const userPosts = async (req, res, next) => {
 
 // login 로직은 dao를 사용하지 않고 passport 로직 사용
 const login = async (req, res, next) => {
+  console.log(req.body.email);
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.error(`authError ${authError}`);
@@ -95,10 +96,22 @@ const login = async (req, res, next) => {
 const follow = async (req, res, next) => {
   try {
     const params = {
-      followId: req.body.followId, // follower가 될 id
       id: req.params.id, // following을 할 id
+      followId: req.params.followerId, // follower가 될 id
     };
     const result = await userService.addFollow(params);
+    return res.status(201).json({ result });
+  } catch (error) {
+    return res.status(404).json({ error: error.toString() });
+  }
+};
+
+const followList = async (req, res, next) => {
+  try {
+    const params = {
+      id: req.params.id,
+    };
+    const result = await userService.followList(params);
     return res.status(201).json({ result });
   } catch (error) {
     return res.status(404).json({ error: error.toString() });
@@ -112,4 +125,5 @@ module.exports = {
   edit,
   userPosts,
   follow,
+  followList,
 };

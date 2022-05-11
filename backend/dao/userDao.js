@@ -99,6 +99,23 @@ const dao = {
         });
     });
   },
+
+  followList(params) {
+    return new Promise((resolve, reject) => {
+      User.findAll({
+        include: {
+          model: User,
+          attributes: ["followingId", "followerId"],
+        },
+      })
+        .then((success) => {
+          resolve(success);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
 };
 
 module.exports = dao;
