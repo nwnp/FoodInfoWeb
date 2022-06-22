@@ -39,8 +39,8 @@ nunjucks.configure("views", {
 // cors
 app.use(cors("http://localhost:8080"));
 
+app.use(morgan("dev"));
 app.use("/", express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
