@@ -70,7 +70,6 @@ export default {
       this.location = null;
       this.nickname = null;
       this.name = null;
-      console.log(payload);
       this.$store.dispatch("authSignup", payload);
     },
   },

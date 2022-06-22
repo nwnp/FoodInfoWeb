@@ -83,7 +83,7 @@ export default {
       context.commit("setLogout");
       window.localStorage.removeItem("token");
     },
-    async authSignup(payload) {
+    async authSignup(context, payload) {
       await axios
         .post("/serverApi/users/signup", payload)
         .then((res) => {
