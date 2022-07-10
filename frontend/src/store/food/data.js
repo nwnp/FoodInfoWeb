@@ -22,8 +22,6 @@ export default {
       await axios
         .get(`https://api.allorigins.win/raw?url=${url}`)
         .then((res) => {
-          console.log(res);
-          console.log(typeof res);
           commit("setNutritionList", res.data.body.items);
         });
     },
