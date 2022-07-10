@@ -15,7 +15,7 @@
   </body>
   <script>
     let contents = document.querySelector("#contents");
-    let thisUrl = `http://apis.data.go.kr/1471000/HtfsInfoService2/getHtfsItem?ServiceKey=iDkLT4eS%2FHMo6lNvhVqC0ls3w2lW41gVYeFPsE98tklSxWHVKd%2F5G%2F7Dbu7Xrxt4Bb%2BFsPXzcc7nNzYN16eyUA%3D%3D&numOfRows=1&Prduct=+프리맥&type=json`;
+    let thisUrl = `http://apis.data.go.kr/1471000/HtfsInfoService2/getHtfsItem?ServiceKey=iDkLT4eS%2FHMo6lNvhVqC0ls3w2lW41gVYeFPsE98tklSxWHVKd%2F5G%2F7Dbu7Xrxt4Bb%2BFsPXzcc7nNzYN16eyUA%3D%3D&numOfRows=12&type=json`;
     let btnData = document.addEventListener("click", () => {
       fetchData(thisUrl, contents);
     });
@@ -28,6 +28,8 @@
         })
         .then((data) => {
           document.getElementById("text").innerHTML = data;
+          const dataJson = JSON.parse(data);
+          console.log(dataJson.body);
         });
     }
   </script>

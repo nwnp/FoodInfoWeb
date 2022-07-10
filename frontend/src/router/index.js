@@ -32,6 +32,10 @@ const routes = [
     component: () => import("../views/post/postDetail.vue"),
   },
   {
+    path: "/nutrition",
+    component: () => import("../views/data/data.vue"),
+  },
+  {
     path: "/*",
     component: () => import("../components/NotFound.vue"),
   },
