@@ -32,8 +32,8 @@ const routes = [
     component: () => import("../views/post/postDetail.vue"),
   },
   {
-    path: "/nutrition",
-    component: () => import("../views/data/data.vue"),
+    path: "/nutritions",
+    component: () => import("../views/nutritions/nutritions.vue"),
   },
   {
     path: "/*",

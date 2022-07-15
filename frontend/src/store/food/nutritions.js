@@ -23,6 +23,7 @@ export default {
         .get(`https://api.allorigins.win/raw?url=${url}`)
         .then((res) => {
           commit("setNutritionList", res.data.body.items);
+          console.log(res.data.body.items);
         });
     },
   },
