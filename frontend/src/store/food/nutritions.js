@@ -5,11 +5,13 @@ export default {
     Nutritions: null,
     NutritionList: [],
     page: 1,
+    SelectedItem: null,
   },
   getters: {
     Nutritions: (state) => state.Nutritions,
     NutritionList: (state) => state.NutritionList,
     page: (state) => state.page,
+    SelectedItem: (state) => state.SelectedItem,
   },
   mutations: {
     setNutritionList(state, payload) {
@@ -21,6 +23,9 @@ export default {
     setPage(state, payload) {
       state.page = payload;
     },
+    setSelectedItem(state, payload) {
+      state.SelectedItem = payload;
+    },
   },
   actions: {
     async actNutritionList({ commit }, payload) {
@@ -31,6 +36,7 @@ export default {
         .get(`https://api.allorigins.win/raw?url=${url}`)
         .then((res) => {
           commit("setNutritionList", res.data.body.items);
+          console.log(res.data.body.items);
         });
     },
     async actNutritionInfiniteScroll({ commit }, payload) {
@@ -49,6 +55,9 @@ export default {
             state.complete();
           }
         });
+    },
+    async actSelectedItem({ commit }, payload) {
+      commit("setSelectedItem", payload);
     },
   },
 };

@@ -25,7 +25,9 @@ import InfiniteLoading from "vue-infinite-loading";
 
 export default {
   data() {
-    return {};
+    return {
+      index: null,
+    };
   },
   components: {
     nutritionModal: NutritionsModal,
@@ -47,11 +49,9 @@ export default {
       this.$store.dispatch("actNutritionList", payload);
     },
     nutritionsModal(index) {
-      console.log("index", index);
+      this.$store.dispatch("actSelectedItem", index);
       this.$bvModal.show("modal-nutritions");
     },
-
-    /* eslint-disable no-unused-vars */
     infiniteHandler($state) {
       const payload = { pageNumber: this.PageNumber + 1, state: $state };
       this.$store.dispatch("actNutritionInfiniteScroll", payload);

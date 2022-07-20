@@ -5,7 +5,6 @@
       <div style="display: flex; flexdirection: column">
         <b-dropdown id="dropdown-1" text="페이지 이동" class="m-md-2" size="sm">
           <b-dropdown-item href="/">메인 페이지</b-dropdown-item>
-          <b-dropdown-item href="/about">공지사항</b-dropdown-item>
           <b-dropdown-item href="/posts">게시글</b-dropdown-item>
           <b-dropdown-item href="/nutritions">건겅기능식품</b-dropdown-item>
         </b-dropdown>
